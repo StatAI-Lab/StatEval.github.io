@@ -71,7 +71,7 @@
           <a href="https://arxiv.org/abs/2510.09517" class="text-primary hover:text-secondary flex items-center transition-colors text-lg">
             <i class="fa fa-file-pdf-o mr-2"></i> Paper
           </a>
-          <a href="https://github.com/StatEval/StatEval" target="_blank" class="text-primary hover:text-secondary flex items-center transition-colors text-lg">
+          <a href="https://github.com/StatAI-Lab/StatEval" target="_blank" class="text-primary hover:text-secondary flex items-center transition-colors text-lg">
             <i class="fa fa-github mr-2"></i> GitHub
           </a>
         </div>
@@ -81,18 +81,17 @@
           <strong>StatEval</strong>, developed by the team of Professor Fan Zhou at Shanghai University of Finance and Economics, is the first benchmark systematically organized along both <strong>difficulty</strong> and <strong>disciplinary</strong> axes to evaluate large language models’ statistical reasoning.
         </p>
         <p class="text-gray-700 text-center max-w-3xl mb-2 text-base">
-          It includes a <strong>Foundational Knowledge Dataset</strong> of over <strong>13,000</strong> problems from 50+ textbooks and a <strong>Statistical Research Dataset</strong> of over <strong>2,000</strong> proof-based questions sourced from 18 top-tier journals in statistics, probability, econometrics, and machine learning.
+          It includes a <strong>Foundational Knowledge Dataset</strong> comprising exactly <strong>22,262</strong> problems (<strong>9,382</strong> undergraduate and <strong>12,880</strong> graduate instances) curated from 76 classical textbooks and extensive exam collections.
         </p>
         <p class="text-gray-700 text-center max-w-3xl mb-4 text-base">
-          The <strong>test sets</strong> of both datasets are publicly available and can be accessed on Hugging Face:
+          Furthermore, it features a <strong>Statistical Research Dataset</strong> consisting of <strong>84,179</strong> proof-based tasks derived from <strong>6,953</strong> high-impact research articles (published between 2000 and 2025). These tasks are categorized by derivation difficulty into <strong>40,366</strong> Easy, <strong>22,013</strong> Medium, and <strong>21,800</strong> Hard problems.
+        </p>
+        <p class="text-gray-700 text-center max-w-3xl mb-4 text-base">
+          A representative partial <strong>test set</strong> (Demo) is publicly available and can be accessed on Hugging Face:
         </p>
         <p class="text-gray-700 text-center max-w-3xl text-base">
-          📘 <strong>Foundational Knowledge Dataset</strong>: 
-          <a href="https://huggingface.co/datasets/0v01111/StatEval-Foundational-knowledge" target="_blank" class="text-blue-600 hover:underline font-medium">
-            View on Hugging Face
-          </a><br>
-          📗 <strong>Statistical Research Dataset</strong>: 
-          <a href="https://huggingface.co/datasets/0v01111/StatEval-Statistical-Research" target="_blank" class="text-blue-600 hover:underline font-medium">
+          🤗 <strong>StatEval Demo Dataset</strong>: 
+          <a href="https://huggingface.co/datasets/StatAILab/StatEval" target="_blank" class="text-blue-600 hover:underline font-medium">
             View on Hugging Face
           </a>
         </p>
@@ -106,9 +105,6 @@
   <section class="py-12 bg-neutral">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
 
-      <!-- =============================== -->
-      <!-- Overview 图标题 + 图片 + 描述 -->
-      <!-- =============================== -->
       <h2 class="text-2xl font-semibold text-center mb-6 text-gray-800">
         A big picture of the StatEval Benchmark
       </h2>
@@ -117,7 +113,7 @@
         <img 
           src="images/overview.png" 
           alt="StatEval Overview Diagram" 
-          class="max-w-full h-auto"
+          class="max-w-full h-auto opacity-80"
           style="max-width: 800px;" 
         >
       </div>
@@ -125,43 +121,39 @@
       <p class="text-center text-gray-600 mb-10 max-w-4xl mx-auto text-sm sm:text-base">
         Overall structure of the <strong>StatEval</strong> benchmark, 
         showing the two datasets — <strong>Foundational Knowledge</strong> and <strong>Statistical Research</strong> — 
-        along with their hierarchical organization and representative task examples.
+        along with their hierarchical organization and representative task examples.<br>
+        <span class="italic text-red-500 text-xs">(*Note: This overview diagram reflects a previous version and is currently being updated to match the latest dataset scaling.)</span>
       </p>
 
-      <!-- =============================== -->
-      <!-- Foundational Knowledge Dataset -->
-      <!-- =============================== -->
       <h3 class="text-2xl font-semibold mb-4 text-center text-gray-900">
         Foundational Knowledge Dataset
       </h3>
       <p class="text-gray-700 text-sm mb-6 max-w-4xl mx-auto text-center">
-          - 6,336 undergraduate-level questions (e.g., elementary probability, linear regression, basic ML).<br>
-          - 7,481 graduate-level questions (e.g., advanced probability, empirical processes, causal inference).<br>
-          - Sourced from 45+ textbooks, preliminary exam, and curated course materials.
+          - <strong>9,382</strong> undergraduate-level questions (e.g., elementary probability, linear regression, basic ML).<br>
+          - <strong>12,880</strong> graduate-level questions (e.g., advanced probability, empirical processes, causal inference).<br>
+          - Sourced from <strong>76</strong> classical textbooks, preliminary exams, and curated course materials.
       </p>
 
       <div class="flex justify-center mb-4">
         <img 
           src="images/foundational.png" 
           alt="Foundational Knowledge Dataset Composition and Distribution" 
-          class="max-w-full h-auto"
+          class="max-w-full h-auto opacity-80"
           style="max-width: 800px;" 
         >
       </div>
       <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto text-sm sm:text-base">
         Composition and distribution of the <strong>Foundational Knowledge Dataset</strong>, 
-        showing proportions across subfields, educational levels, and problem formats.
+        showing proportions across subfields, educational levels, and problem formats.<br>
+        <span class="italic text-red-500 text-xs">(*Note: The statistics in this figure are from an older version and are currently being updated.)</span>
       </p>
 
-      <!-- =============================== -->
-      <!-- Statistical Research Dataset -->
-      <!-- =============================== -->
       <h3 class="text-2xl font-semibold mb-4 text-center text-gray-900">
         Statistical Research Dataset
       </h3>
       <p class="text-gray-700 text-sm mb-6 max-w-4xl mx-auto text-center">
-          - 2,374 proof-based tasks (extracted from 2,719 journal papers across 18 venues).<br>
-          - 8 research subdomains (e.g., classical inference, high-dimensional modeling, Bayesian nonparametrics).<br>
+          - <strong>84,179</strong> proof-based tasks (extracted from <strong>6,953</strong> high-impact journal articles published between 2000-2025).<br>
+          - Categorized by derivation difficulty: <strong>40,366</strong> Easy, <strong>22,013</strong> Medium, and <strong>21,800</strong> Hard.<br>
           - 8 theoretical property categories (e.g., asymptotic properties, optimality results, identifiability).
       </p>
 
@@ -169,13 +161,14 @@
         <img 
           src="images/research.png" 
           alt="Statistical Research Dataset Composition and Distribution" 
-          class="max-w-full h-auto"
+          class="max-w-full h-auto opacity-80"
           style="max-width: 800px;" 
         >
       </div>
       <p class="text-center text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
         Composition and distribution of the <strong>Statistical Research Dataset</strong>, 
-        illustrating coverage across research subdomains and theoretical property categories.
+        illustrating coverage across research subdomains and theoretical property categories.<br>
+        <span class="italic text-red-500 text-xs">(*Note: The statistics in this figure are from an older version and are currently being updated.)</span>
       </p>
 
     </div>
@@ -184,27 +177,26 @@
 
 
 
-  <section id="leaderboard" class="py-16 md:py-24 bg-neutral/50">
+<section id="leaderboard" class="py-16 md:py-24 bg-neutral/50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">Leaderboard</h2>
+            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4 text-gray-900">Leaderboard</h2>
             <p class="text-lg text-gray-600">Performance comparison of various models on two datasets across different statistical topics and difficulty levels.</p>
         </div>
         
-        <!-- Leaderboard Filters -->
-        <div class="mb-10 bg-white p-4 rounded-xl shadow-md">
-            <div class="flex flex-wrap gap-6 items-center justify-center">
+        <div class="mb-10 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+            <div class="flex flex-wrap gap-6 items-center justify-center sm:justify-start">
                 <div class="flex items-center">
-                    <label class="mr-2 text-gray-600">Dataset Type:</label>
-                    <select id="dataset-type" class="border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50">
+                    <label class="mr-3 font-medium text-gray-700">Dataset:</label>
+                    <select id="dataset-type" class="border border-gray-300 rounded-lg px-4 py-2 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all cursor-pointer text-gray-700">
                         <option value="foundational">Foundational Knowledge Dataset</option>
                         <option value="research">Statistical Research Dataset</option>
                     </select>
                 </div>
                 
-                <div class="flex items-center">
-                    <label class="mr-2 text-gray-600" id="category-label">Category:</label>
-                    <select id="category-type" class="border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50">
+                <div id="category-filter-container" class="flex items-center transition-opacity duration-300">
+                    <label class="mr-3 font-medium text-gray-700" id="category-label">Level:</label>
+                    <select id="category-type" class="border border-gray-300 rounded-lg px-4 py-2 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all cursor-pointer text-gray-700">
                         <option value="undergraduate">Undergraduate</option>
                         <option value="graduate">Graduate</option>
                         <option value="overall">Overall</option>
@@ -212,457 +204,230 @@
                 </div>
                 
                 <div class="flex items-center ml-auto">
-                    <button id="refresh-ranking" class="flex items-center text-primary hover:text-secondary transition-colors">
-                        <i class="fa fa-refresh mr-1"></i> Refresh View
+                    <button id="refresh-ranking" class="flex items-center px-4 py-2 text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors font-medium">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        Refresh View
                     </button>
                 </div>
             </div>
         </div>
         
-        <!-- Leaderboard Content Area -->
         <div class="space-y-8">
-            <!-- Foundational Knowledge Results -->
-            <div id="foundational-results" class="space-y-8">
-                <!-- Undergraduate Table -->
-                <div id="undergraduate-table" class="bg-white rounded-xl shadow-lg p-6">
+            <div id="foundational-results" class="space-y-8 transition-all duration-500">
+                
+                <div id="undergraduate-table" class="bg-white rounded-xl shadow-md border border-gray-100 p-6">
                     <div class="flex justify-between items-center mb-6 flex-wrap gap-4">
-                        <h3 class="text-xl font-semibold">Undergraduate Performance - Foundational Knowledge Dataset</h3>
-                        <div class="text-sm text-gray-500">
-                            Data Update Time: <span>2025-10-08</span>
+                        <h3 class="text-xl font-bold text-gray-800">Undergraduate Performance</h3>
+                        <div class="text-sm px-3 py-1 bg-gray-100 rounded-full text-gray-500 font-medium">
+                            Updated: <span>2026-04</span>
                         </div>
                     </div>
-                    
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
+                            <thead class="bg-gray-50/80">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Rank
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Model
-                                    </th>
-                                    <th scope="col" class="px-10 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="2">
-                                        Probability <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-10 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="3">
-                                        Statistics <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-10 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="4">
-                                        Machine Learning <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-10 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-primary/10 text-primary cursor-pointer sortable" data-col="5">
-                                        Undergraduate Mean <i class="fa fa-sort-desc ml-1"></i>
-                                    </th>
+                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider rounded-tl-lg">Rank</th>
+                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Model</th>
+                                    <th scope="col" class="px-8 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="2">Probability <i></i></th>
+                                    <th scope="col" class="px-8 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="3">Statistics <i></i></th>
+                                    <th scope="col" class="px-8 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="4">Machine Learning <i></i></th>
+                                    <th scope="col" class="px-8 py-4 text-center text-xs font-bold text-blue-700 uppercase tracking-wider bg-blue-50 cursor-pointer sortable hover:bg-blue-100 transition-colors rounded-tr-lg" data-col="5">Undergrad Mean <i></i></th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <!-- Data rows will be populated by JavaScript -->
-                            </tbody>
+                            <tbody class="bg-white divide-y divide-gray-100"></tbody>
                         </table>
                     </div>
                 </div>
                 
-                <!-- Graduate Table -->
-                <div id="graduate-table" class="bg-white rounded-xl shadow-lg p-6 hidden">
+                <div id="graduate-table" class="bg-white rounded-xl shadow-md border border-gray-100 p-6 hidden">
                     <div class="flex justify-between items-center mb-6 flex-wrap gap-4">
-                        <h3 class="text-xl font-semibold">Graduate Performance - Foundational Knowledge Dataset</h3>
-                        <div class="text-sm text-gray-500">
-                            Data Update Time: <span>2025-10-08</span>
+                        <h3 class="text-xl font-bold text-gray-800">Graduate Performance</h3>
+                        <div class="text-sm px-3 py-1 bg-gray-100 rounded-full text-gray-500 font-medium">
+                            Updated: <span>2026-04</span>
                         </div>
                     </div>
-                    
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
+                            <thead class="bg-gray-50/80">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Rank
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Model
-                                    </th>
-                                    <th scope="col" class="px-10 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="2">
-                                        Probability <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-10 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="3">
-                                        Statistics <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-10 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="4">
-                                        Machine Learning <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-10 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-primary/10 text-primary cursor-pointer sortable" data-col="5">
-                                        Graduate Mean <i class="fa fa-sort-desc ml-1"></i>
-                                    </th>
+                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider rounded-tl-lg">Rank</th>
+                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Model</th>
+                                    <th scope="col" class="px-8 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="2">Probability <i></i></th>
+                                    <th scope="col" class="px-8 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="3">Statistics <i></i></th>
+                                    <th scope="col" class="px-8 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="4">Machine Learning <i></i></th>
+                                    <th scope="col" class="px-8 py-4 text-center text-xs font-bold text-blue-700 uppercase tracking-wider bg-blue-50 cursor-pointer sortable hover:bg-blue-100 transition-colors rounded-tr-lg" data-col="5">Graduate Mean <i></i></th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <!-- Data rows will be populated by JavaScript -->
-                            </tbody>
+                            <tbody class="bg-white divide-y divide-gray-100"></tbody>
                         </table>
                     </div>
                 </div>
                 
-                <!-- Overall Table -->
-                <div id="overall-table" class="bg-white rounded-xl shadow-lg p-6 hidden">
+                <div id="overall-table" class="bg-white rounded-xl shadow-md border border-gray-100 p-6 hidden">
                     <div class="flex justify-between items-center mb-6 flex-wrap gap-4">
-                        <h3 class="text-xl font-semibold">Overall Performance - Foundational Knowledge Dataset</h3>
-                        <div class="text-sm text-gray-500">
-                            Data Update Time: <span>2025-10-08</span>
+                        <h3 class="text-xl font-bold text-gray-800">Overall Performance (Foundational)</h3>
+                        <div class="text-sm px-3 py-1 bg-gray-100 rounded-full text-gray-500 font-medium">
+                            Updated: <span>2026-04</span>
                         </div>
                     </div>
-                    
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
+                            <thead class="bg-gray-50/80">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Rank
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Model
-                                    </th>
-                                    <th scope="col" class="px-10 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="2">
-                                        Undergraduate Mean <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-10 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="3">
-                                        Graduate Mean <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-10 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-primary/10 text-primary cursor-pointer sortable" data-col="4">
-                                        Overall Mean <i class="fa fa-sort-desc ml-1"></i>
-                                    </th>
+                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider rounded-tl-lg">Rank</th>
+                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Model</th>
+                                    <th scope="col" class="px-10 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="2">Undergrad Mean <i></i></th>
+                                    <th scope="col" class="px-10 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="3">Graduate Mean <i></i></th>
+                                    <th scope="col" class="px-10 py-4 text-center text-xs font-bold text-blue-700 uppercase tracking-wider bg-blue-50 cursor-pointer sortable hover:bg-blue-100 transition-colors rounded-tr-lg" data-col="4">Overall Mean <i></i></th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <!-- Data rows will be populated by JavaScript -->
-                            </tbody>
+                            <tbody class="bg-white divide-y divide-gray-100"></tbody>
                         </table>
                     </div>
                 </div>
             </div>
             
-            <!-- Research Level Results -->
-            <div id="research-results" class="space-y-8 hidden">
-                <!-- Research Area Table -->
-                <div id="research-area-table" class="bg-white rounded-xl shadow-lg p-6">
+            <div id="research-results" class="space-y-8 hidden transition-all duration-500">
+                <div id="research-difficulty-table" class="bg-white rounded-xl shadow-md border border-gray-100 p-6">
                     <div class="flex justify-between items-center mb-6 flex-wrap gap-4">
-                        <h3 class="text-xl font-semibold">Research Area Performance - Statistical Research Dataset</h3>
-                        <div class="text-sm text-gray-500">
-                            Data Update Time: <span>2025-10-08</span>
+                        <h3 class="text-xl font-bold text-gray-800">Frontier Research Tasks by Difficulty</h3>
+                        <div class="text-sm px-3 py-1 bg-gray-100 rounded-full text-gray-500 font-medium">
+                            Updated: <span>2026-04</span>
                         </div>
                     </div>
                     
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
+                            <thead class="bg-gray-50/80">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Rank
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Model
-                                    </th>
-                                    <th scope="col" class="px-10 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="2">
-                                        Probability <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-10 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="3">
-                                        Statistics <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-10 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="4">
-                                        Machine Learning <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-10 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-primary/10 text-primary cursor-pointer sortable" data-col="5">
-                                        Mean <i class="fa fa-sort-desc ml-1"></i>
-                                    </th>
+                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider rounded-tl-lg">Rank</th>
+                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Model</th>
+                                    <th scope="col" class="px-10 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="2">Easy <i></i></th>
+                                    <th scope="col" class="px-10 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="3">Medium <i></i></th>
+                                    <th scope="col" class="px-10 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="4">Hard <i></i></th>
+                                    <th scope="col" class="px-10 py-4 text-center text-xs font-bold text-blue-700 uppercase tracking-wider bg-blue-50 cursor-pointer sortable hover:bg-blue-100 transition-colors rounded-tr-lg" data-col="5">Mean <i></i></th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <!-- Data rows will be populated by JavaScript -->
-                            </tbody>
+                            <tbody class="bg-white divide-y divide-gray-100"></tbody>
                         </table>
-                    </div>
-                </div>
-                
-                <!-- Theoretical Property Table -->
-                <div id="theoretical-property-table" class="bg-white rounded-xl shadow-lg p-6 hidden">
-                    <div class="flex justify-between items-center mb-6 flex-wrap gap-4">
-                        <h3 class="text-xl font-semibold">Theoretical Property Performance - Statistical Research Dataset</h3>
-                        <div class="text-sm text-gray-500">
-                            Data Update Time: <span>2025-10-08</span>
-                        </div>
-                    </div>
-                    
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Rank
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Model
-                                    </th>
-                                    <th scope="col" class="px-8 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="2">
-                                        Asymp <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-8 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="3">
-                                        Conv <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-8 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="4">
-                                        Dist <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-8 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="5">
-                                        Gen <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-8 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="6">
-                                        Ident <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-8 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="7">
-                                        Opt <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-8 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="8">
-                                        Struct <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-8 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer sortable" data-col="9">
-                                        Test <i class="fa fa-sort ml-1 text-gray-400"></i>
-                                    </th>
-                                    <th scope="col" class="px-8 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-primary/10 text-primary cursor-pointer sortable" data-col="10">
-                                        Mean <i class="fa fa-sort-desc ml-1"></i>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <!-- Data rows will be populated by JavaScript -->
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <div class="mt-6 text-sm text-gray-600 bg-gray-50 p-4 rounded-lg">
-                        <p class="font-medium mb-2">Abbreviations:</p>
-                        <p>Asymp = Asymptotic Properties; Conv = Convergence & Stability; 
-                        Dist = Distributional Properties; Gen = Generalization & Error Bounds; 
-                        Ident = Identifiability & Consistency; Opt = Optimality Results; 
-                        Struct = Structural Guarantees; Test = Testing Validity.</p>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
 
 <script>
-// Foundational Knowledge Dataset data
+// --- Data Sources ---
 const foundationalData = [
-    { model: "GPT-5", 
-      gProb: 78.94, gStat: 82.31, gMl: 71.28, gMean: 78.72,
-      ugProb: 88.23, ugStat: 87.46, ugMl: 85.90, ugMean: 87.24,
-      overallMean: 82.85 },
-      
-    { model: "Gemini-2.5 Pro", 
-      gProb: 72.15, gStat: 79.12, gMl: 68.78, gMean: 75.43,
-      ugProb: 88.53, ugStat: 86.84, ugMl: 85.24, ugMean: 86.90,
-      overallMean: 80.88 },
-      
-    { model: "GPT-OSS-120B", 
-      gProb: 74.42, gStat: 75.43, gMl: 73.31, gMean: 74.46,
-      ugProb: 88.76, ugStat: 84.91, ugMl: 83.32, ugMean: 85.57,
-      overallMean: 80.27 },
-      
-    { model: "GPT-5 mini", 
-      gProb: 78.66, gStat: 78.14, gMl: 71.61, gMean: 76.50,
-      ugProb: 86.84, ugStat: 81.63, ugMl: 86.17, ugMean: 84.69,
-      overallMean: 80.37 },
-      
-    { model: "Gemini-2.5 Flash", 
-      gProb: 71.27, gStat: 75.25, gMl: 69.27, gMean: 73.11,
-      ugProb: 86.73, ugStat: 80.23, ugMl: 78.53, ugMean: 81.67,
-      overallMean: 77.23 },
-      
-    { model: "Qwen3-235b-a22b-2507", 
-      gProb: 73.43, gStat: 76.92, gMl: 68.46, gMean: 73.13,
-      ugProb: 84.29, ugStat: 77.55, ugMl: 80.56, ugMean: 80.57,
-      overallMean: 76.96 },
-      
-    { model: "GPT-OSS-20B", 
-      gProb: 68.19, gStat: 72.19, gMl: 67.48, gMean: 69.69,
-      ugProb: 85.53, ugStat: 81.76, ugMl: 77.10, ugMean: 81.40,
-      overallMean: 75.77 },
-      
-    { model: "Qwen3-30b-a3b-instruct-2507", 
-      gProb: 71.46, gStat: 71.07, gMl: 61.49, gMean: 67.46,
-      ugProb: 73.76, ugStat: 74.27, ugMl: 77.37, ugMean: 75.09,
-      overallMean: 71.49 },
-      
-    { model: "Qwen2.5-72B", 
-      gProb: 68.86, gStat: 64.58, gMl: 62.51, gMean: 64.62,
-      ugProb: 78.49, ugStat: 75.98, ugMl: 72.57, ugMean: 75.68,
-      overallMean: 70.42 },
-      
-    { model: "DeepSeek-V3.1", 
-      gProb: 51.09, gStat: 43.27, gMl: 44.49, gMean: 45.13,
-      ugProb: 80.27, ugStat: 64.57, ugMl: 47.78, ugMean: 62.88,
-      overallMean: 53.98 },
-      
-    { model: "LLaMA-3.1-8B", 
-      gProb: 47.98, gStat: 40.71, gMl: 34.74, gMean: 39.98,
-      ugProb: 48.94, ugStat: 44.18, ugMl: 43.12, ugMean: 45.30,
-      overallMean: 42.79 }
+    { model: "Gemini-3.1-pro-preview", gProb: 82.58, gStat: 87.54, gMl: 89.14, gMean: 86.47, ugProb: 92.01, ugStat: 90.50, ugMl: 90.16, ugMean: 91.10, overallMean: 89.09 },
+    { model: "Qwen-3.6-plus", gProb: 80.83, gStat: 92.36, gMl: 82.77, gMean: 86.70, ugProb: 89.88, ugStat: 89.25, ugMl: 92.27, ugMean: 89.98, overallMean: 88.56 },
+    { model: "GPT-5.4", gProb: 86.89, gStat: 80.57, gMl: 91.09, gMean: 84.96, ugProb: 89.88, ugStat: 88.33, ugMl: 91.95, ugMean: 89.55, overallMean: 87.56 },
+    { model: "DeepSeek-Reasoner", gProb: 92.00, gStat: 88.79, gMl: 75.15, gMean: 86.47, ugProb: 90.16, ugStat: 85.84, ugMl: 84.56, ugMean: 87.51, overallMean: 87.06 },
+    { model: "Claude-opus-4.7", gProb: 89.67, gStat: 86.68, gMl: 76.81, gMean: 85.19, ugProb: 86.90, ugStat: 89.48, ugMl: 69.75, ugMean: 85.38, overallMean: 85.30 },
+    { model: "Doubao-seed-2.0-pro", gProb: 82.22, gStat: 82.55, gMl: 79.15, gMean: 81.64, ugProb: 80.52, ugStat: 73.30, ugMl: 85.56, ugMean: 78.28, overallMean: 79.74 },
+    { model: "Qwen3-4b", gProb: 69.65, gStat: 70.37, gMl: 55.53, gMean: 66.61, ugProb: 69.01, ugStat: 55.49, ugMl: 73.70, ugMean: 64.09, overallMean: 65.19 }
 ];
 
-// Research Dataset data
 const researchData = [
-    { model: "GPT5-mini", 
-      ml: 48.56, prob: 66.54, stat: 59.46,
-      asymp: 62.20, conv: 54.55, dist: 63.42, gen: 25.00, ident: 71.48, opt: 52.16, struct: 62.79, test: 63.26,
-      mean: 57.62 },
-      
-    { model: "Gem2.5-flash", 
-      ml: 44.10, prob: 58.65, stat: 53.26,
-      asymp: 53.38, conv: 49.24, dist: 56.04, gen: 21.23, ident: 67.35, opt: 53.45, struct: 60.47, test: 49.30,
-      mean: 51.14 },
-      
-    { model: "Qwen3-235b-a22b", 
-      ml: 43.29, prob: 62.03, stat: 52.08,
-      asymp: 53.86, conv: 50.76, dist: 59.06, gen: 20.55, ident: 67.70, opt: 48.28, struct: 55.81, test: 49.77,
-      mean: 51.10 },
-      
-    { model: "GPT-oss-120B", 
-      ml: 41.28, prob: 56.39, stat: 47.18,
-      asymp: 53.38, conv: 42.42, dist: 50.67, gen: 18.49, ident: 60.82, opt: 45.69, struct: 65.12, test: 61.86,
-      mean: 49.49 },
-      
-    { model: "GPT5-nano", 
-      ml: 42.66, prob: 53.76, stat: 47.61,
-      asymp: 48.91, conv: 46.21, dist: 48.99, gen: 20.89, ident: 61.51, opt: 42.24, struct: 54.65, test: 55.81,
-      mean: 47.05 },
-      
-    { model: "Qwen3-30b-a3b-instruct", 
-      ml: 41.20, prob: 59.77, stat: 44.93,
-      asymp: 49.28, conv: 49.24, dist: 53.36, gen: 18.15, ident: 61.17, opt: 41.38, struct: 60.47, test: 53.49,
-      mean: 47.43 },
-      
-    { model: "GPT-oss-20B", 
-      ml: 34.26, prob: 48.87, stat: 34.26,
-      asymp: 44.44, conv: 37.12, dist: 43.29, gen: 18.15, ident: 55.33, opt: 39.66, struct: 52.33, test: 48.84,
-      mean: 42.21 },
-      
-    { model: "Gem2.5-flashlite", 
-      ml: 36.03, prob: 51.50, stat: 43.11,
-      asymp: 40.82, conv: 40.15, dist: 46.31, gen: 17.12, ident: 56.36, opt: 43.53, struct: 50.00, test: 46.51,
-      mean: 41.58 }
+    { model: "GPT-5.4", easy: 68.28, medium: 65.45, hard: 51.27, mean: 61.67 },
+    { model: "DeepSeek-V3.2", easy: 58.11, medium: 54.03, hard: 40.60, mean: 51.03 },
+    { model: "Claude-opus-4.7", easy: 56.72, medium: 54.11, hard: 41.84, mean: 50.92 },
+    { model: "Qwen-3.6", easy: 55.42, medium: 51.92, hard: 40.12, mean: 49.17 },
+    { model: "Gemini-3.1-pro", easy: 55.92, medium: 49.13, hard: 37.27, mean: 47.55 },
+    { model: "Doubao-seed-2.0-pro", easy: 47.14, medium: 44.09, hard: 33.57, mean: 41.63 },
+    { model: "Qwen3-4b", easy: 28.55, medium: 23.91, hard: 17.31, mean: 23.26 }
 ];
 
-// Populate tables with data
+// 预排序（按Mean倒序）
+foundationalData.sort((a, b) => b.overallMean - a.overallMean);
+researchData.sort((a, b) => b.mean - a.mean);
+
 function populateTables() {
-    // Populate Undergraduate table
+    // 1. Foundational - Undergraduate
     const undergradTbody = document.querySelector('#undergraduate-table tbody');
     undergradTbody.innerHTML = '';
     foundationalData.forEach((item, index) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${index + 1}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.model}</td>
-            <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.ugProb}</td>
-            <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.ugStat}</td>
-            <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.ugMl}</td>
-            <td class="px-10 py-4 whitespace-nowrap text-sm font-semibold text-center text-primary">${item.ugMean}</td>
-        `;
-        undergradTbody.appendChild(row);
+        undergradTbody.innerHTML += `
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-500">${index + 1}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${item.model}</td>
+                <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.ugProb.toFixed(2)}</td>
+                <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.ugStat.toFixed(2)}</td>
+                <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.ugMl.toFixed(2)}</td>
+                <td class="px-8 py-4 whitespace-nowrap text-sm font-bold text-center text-blue-600 bg-blue-50/50">${item.ugMean.toFixed(2)}</td>
+            </tr>`;
     });
     
-    // Populate Graduate table
+    // 2. Foundational - Graduate
     const gradTbody = document.querySelector('#graduate-table tbody');
     gradTbody.innerHTML = '';
     foundationalData.forEach((item, index) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${index + 1}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.model}</td>
-            <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.gProb}</td>
-            <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.gStat}</td>
-            <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.gMl}</td>
-            <td class="px-10 py-4 whitespace-nowrap text-sm font-semibold text-center text-primary">${item.gMean}</td>
-        `;
-        gradTbody.appendChild(row);
+        gradTbody.innerHTML += `
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-500">${index + 1}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${item.model}</td>
+                <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.gProb.toFixed(2)}</td>
+                <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.gStat.toFixed(2)}</td>
+                <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.gMl.toFixed(2)}</td>
+                <td class="px-8 py-4 whitespace-nowrap text-sm font-bold text-center text-blue-600 bg-blue-50/50">${item.gMean.toFixed(2)}</td>
+            </tr>`;
     });
     
-    // Populate Overall table
+    // 3. Foundational - Overall
     const overallTbody = document.querySelector('#overall-table tbody');
     overallTbody.innerHTML = '';
     foundationalData.forEach((item, index) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${index + 1}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.model}</td>
-            <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.ugMean}</td>
-            <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.gMean}</td>
-            <td class="px-10 py-4 whitespace-nowrap text-sm font-semibold text-center text-primary">${item.overallMean}</td>
-        `;
-        overallTbody.appendChild(row);
+        overallTbody.innerHTML += `
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-500">${index + 1}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${item.model}</td>
+                <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.ugMean.toFixed(2)}</td>
+                <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.gMean.toFixed(2)}</td>
+                <td class="px-10 py-4 whitespace-nowrap text-sm font-bold text-center text-blue-600 bg-blue-50/50">${item.overallMean.toFixed(2)}</td>
+            </tr>`;
     });
     
-    // Populate Research Area table
-    const researchAreaTbody = document.querySelector('#research-area-table tbody');
-    researchAreaTbody.innerHTML = '';
+    // 4. Research - By Difficulty
+    const researchTbody = document.querySelector('#research-difficulty-table tbody');
+    researchTbody.innerHTML = '';
     researchData.forEach((item, index) => {
-        // Calculate mean for research areas
-        const areaMean = ((item.ml + item.prob + item.stat) / 3).toFixed(2);
-        
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${index + 1}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.model}</td>
-            <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.prob}</td>
-            <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.stat}</td>
-            <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.ml}</td>
-            <td class="px-10 py-4 whitespace-nowrap text-sm font-semibold text-center text-primary">${item.mean}</td>
-        `;
-        researchAreaTbody.appendChild(row);
-    });
-    
-    // Populate Theoretical Property table
-    const theoreticalTbody = document.querySelector('#theoretical-property-table tbody');
-    theoreticalTbody.innerHTML = '';
-    researchData.forEach((item, index) => {
-        // Calculate mean for theoretical properties
-        const propMean = ((item.asymp + item.conv + item.dist + item.gen + 
-                          item.ident + item.opt + item.struct + item.test) / 8).toFixed(2);
-        
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${index + 1}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.model}</td>
-            <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.asymp}</td>
-            <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.conv}</td>
-            <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.dist}</td>
-            <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.gen}</td>
-            <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.ident}</td>
-            <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.opt}</td>
-            <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.struct}</td>
-            <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-500 text-center">${item.test}</td>
-            <td class="px-8 py-4 whitespace-nowrap text-sm font-semibold text-center text-primary">${item.mean}</td>
-        `;
-        theoreticalTbody.appendChild(row);
+        researchTbody.innerHTML += `
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-500">${index + 1}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${item.model}</td>
+                <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.easy.toFixed(2)}</td>
+                <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.medium.toFixed(2)}</td>
+                <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.hard.toFixed(2)}</td>
+                <td class="px-10 py-4 whitespace-nowrap text-sm font-bold text-center text-blue-600 bg-blue-50/50">${item.mean.toFixed(2)}</td>
+            </tr>`;
     });
 }
 
-// Initialize table sorting
+// 纯原生 SVG 排序图标生成
+const sortAscIcon = `<svg class="w-3 h-3 inline-block ml-1 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path></svg>`;
+const sortDescIcon = `<svg class="w-3 h-3 inline-block ml-1 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>`;
+const sortNeutralIcon = `<svg class="w-3 h-3 inline-block ml-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>`;
+
 function initTableSorting() {
     document.querySelectorAll('table').forEach(table => {
         const headers = table.querySelectorAll('.sortable');
         const tbody = table.querySelector('tbody');
-        let currentSort = { col: headers.length > 0 ? parseInt(headers[headers.length - 1].dataset.col) : 0, dir: 'desc' };
+        if(headers.length === 0) return;
+        
+        let currentSort = { col: parseInt(headers[headers.length - 1].dataset.col), dir: 'desc' };
 
         function updateSortIcons() {
             headers.forEach(header => {
                 const col = parseInt(header.dataset.col);
-                const icon = header.querySelector('i');
-                
+                const iconContainer = header.querySelector('i');
+                if(!iconContainer) return;
+
                 if (col === currentSort.col) {
-                    icon.className = `fa fa-sort-${currentSort.dir} ml-1`;
-                    icon.style.color = '#165DFF';
+                    iconContainer.innerHTML = currentSort.dir === 'asc' ? sortAscIcon : sortDescIcon;
                 } else {
-                    icon.className = 'fa fa-sort ml-1 text-gray-400';
+                    iconContainer.innerHTML = sortNeutralIcon;
                 }
             });
         }
@@ -674,13 +439,12 @@ function initTableSorting() {
                 currentSort.dir = currentSort.dir === 'asc' ? 'desc' : 'asc';
             } else {
                 currentSort.col = colIndex;
-                currentSort.dir = 'asc';
+                currentSort.dir = 'desc'; // Default new sort to high->low
             }
 
             rows.sort((a, b) => {
                 const aVal = parseFloat(a.cells[colIndex].textContent.trim());
                 const bVal = parseFloat(b.cells[colIndex].textContent.trim());
-                
                 if (!isNaN(aVal) && !isNaN(bVal)) {
                     return currentSort.dir === 'asc' ? aVal - bVal : bVal - aVal;
                 }
@@ -689,7 +453,7 @@ function initTableSorting() {
 
             tbody.innerHTML = '';
             rows.forEach((row, index) => {
-                row.cells[0].textContent = index + 1;
+                row.cells[0].textContent = index + 1; // Update Rank
                 tbody.appendChild(row);
             });
 
@@ -697,101 +461,85 @@ function initTableSorting() {
         }
 
         headers.forEach(header => {
-            header.addEventListener('click', () => {
-                const colIndex = parseInt(header.dataset.col);
-                sortTable(colIndex);
+            // Remove old listeners by cloning to avoid duplicates on re-init
+            const newHeader = header.cloneNode(true);
+            header.parentNode.replaceChild(newHeader, header);
+            
+            newHeader.addEventListener('click', () => {
+                sortTable(parseInt(newHeader.dataset.col));
             });
         });
 
+        // Initialize Icons
         updateSortIcons();
     });
 }
 
-// Handle dataset type change
+// Handle primary Dataset change
 document.getElementById('dataset-type').addEventListener('change', function() {
     const datasetType = this.value;
+    const categoryContainer = document.getElementById('category-filter-container');
     const categorySelect = document.getElementById('category-type');
-    const categoryLabel = document.getElementById('category-label');
     
     if (datasetType === 'foundational') {
         document.getElementById('foundational-results').classList.remove('hidden');
         document.getElementById('research-results').classList.add('hidden');
         
-        // Update category options for foundational dataset
-        categorySelect.innerHTML = `
-            <option value="undergraduate">Undergraduate</option>
-            <option value="graduate">Graduate</option>
-            <option value="overall">Overall</option>
-        `;
-        categoryLabel.textContent = 'Level:';
+        // Show foundational sub-categories
+        categoryContainer.classList.remove('hidden');
+        categoryContainer.classList.remove('opacity-0');
         
-        // Show default table
-        showFoundationalTable('undergraduate');
+        showFoundationalTable(categorySelect.value);
     } else {
         document.getElementById('foundational-results').classList.add('hidden');
         document.getElementById('research-results').classList.remove('hidden');
         
-        // Update category options for research dataset
-        categorySelect.innerHTML = `
-            <option value="research-area">Research Area</option>
-            <option value="theoretical-property">Theoretical Property</option>
-        `;
-        categoryLabel.textContent = 'Category:';
+        // Hide sub-categories for Research since it's just one unified table now
+        categoryContainer.classList.add('hidden');
+        categoryContainer.classList.add('opacity-0');
         
-        // Show default table
-        showResearchTable('research-area');
+        initTableSorting(); // Ensure Research table is sortable
     }
 });
 
-// Handle category type change
+// Handle Foundational sub-category change
 document.getElementById('category-type').addEventListener('change', function() {
-    const datasetType = document.getElementById('dataset-type').value;
-    
-    if (datasetType === 'foundational') {
-        showFoundationalTable(this.value);
-    } else {
-        showResearchTable(this.value);
-    }
+    showFoundationalTable(this.value);
 });
 
-// Show specific foundational table
 function showFoundationalTable(type) {
     document.getElementById('undergraduate-table').classList.add('hidden');
     document.getElementById('graduate-table').classList.add('hidden');
     document.getElementById('overall-table').classList.add('hidden');
     
     document.getElementById(`${type}-table`).classList.remove('hidden');
-    initTableSorting(); // Re-initialize sorting for the visible table
-}
-
-// Show specific research table
-function showResearchTable(type) {
-    document.getElementById('research-area-table').classList.add('hidden');
-    document.getElementById('theoretical-property-table').classList.add('hidden');
-    
-    if (type === 'research-area') {
-        document.getElementById('research-area-table').classList.remove('hidden');
-    } else {
-        document.getElementById('theoretical-property-table').classList.remove('hidden');
-    }
-    initTableSorting(); // Re-initialize sorting for the visible table
-}
-
-// Refresh button functionality
-document.getElementById('refresh-ranking').addEventListener('click', function() {
-    const icon = this.querySelector('i');
-    icon.classList.add('fa-spin');
-    
-    // Repopulate tables and re-initialize sorting
-    populateTables();
     initTableSorting();
+}
+
+// Refresh Button Animation
+document.getElementById('refresh-ranking').addEventListener('click', function() {
+    const icon = this.querySelector('svg');
+    icon.classList.add('animate-spin');
+    
+    // Flash effect
+    const activeTables = document.querySelectorAll('tbody');
+    activeTables.forEach(t => t.style.opacity = '0.3');
     
     setTimeout(() => {
-        icon.classList.remove('fa-spin');
-    }, 800);
+        populateTables();
+        const activeType = document.getElementById('dataset-type').value;
+        if(activeType === 'foundational') {
+            showFoundationalTable(document.getElementById('category-type').value);
+        } else {
+            initTableSorting();
+        }
+        
+        activeTables.forEach(t => t.style.opacity = '1');
+        icon.classList.remove('animate-spin');
+    }, 400);
 });
 
-// Initialize page
+// Init
 document.addEventListener('DOMContentLoaded', function() {
     populateTables();
     initTableSorting();
@@ -810,202 +558,239 @@ document.addEventListener('DOMContentLoaded', function() {
           <!-- ========================================= -->
           <!-- 🧩 Data Processing Pipeline Section -->
           <!-- ========================================= -->
-          <div class="bg-white border border-gray-200 rounded-lg p-6 md:p-8 shadow-sm mb-10">
-            <h3 class="text-xl font-semibold mb-4">1. Data Processing Pipeline</h3>
+          <div class="bg-white border border-gray-200 rounded-xl p-6 md:p-10 shadow-sm mb-10">
+            <h3 class="text-2xl font-bold mb-4 text-gray-900">1. Data Processing Pipeline</h3>
 
-            <p class="text-gray-700 mb-6">
-              The <strong>StatEval</strong> pipeline extracts and standardizes problems from diverse academic sources using LLMs (GPT-5, Gemini series) combined with human-in-the-loop verification. 
-              It consists of five core stages that convert raw documents into high-quality, structured evaluation data.
+            <p class="text-gray-700 mb-6 text-lg">
+              To overcome the brittleness of pure rule-based methods and the hallucination risks of pure LLM approaches, the <strong>StatEval</strong> pipeline adopts a synergistic <strong>hybrid modular architecture</strong>. By strategically combining deterministic regular expressions for structural extraction with the powerful semantic orchestration of GPT-5.4 and GPT-5.4-mini, the end-to-end workflow comprises six sequential modules:
             </p>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8">
-              <!-- Step 1 -->
-              <div class="bg-neutral rounded-lg border border-gray-200 p-5">
-                <h4 class="font-medium text-gray-900 mb-2">1. File Conversion</h4>
-                <p class="text-gray-600 text-sm">
-                  Converts PDFs, scanned files, and <span class="font-mono">LaTeX</span> sources into structured text using multi-modal LLMs like <em>MinerU</em>.
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+                <div class="text-blue-600 font-bold text-xl mb-2 flex items-center">
+                  <span class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">1</span>
+                  File-Conversion
+                </div>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Homogenizes PDFs, scanned manuscripts, and <span class="font-mono bg-gray-200 px-1 rounded">LaTeX</span> sources into structured Markdown. Employs advanced MLLMs (e.g., <em>MinerU</em>) for high-fidelity mathematical OCR and layout reconstruction.
                 </p>
               </div>
 
-              <!-- Step 2 -->
-              <div class="bg-neutral rounded-lg border border-gray-200 p-5">
-                <h4 class="font-medium text-gray-900 mb-2">2. Context Segmentation</h4>
-                <p class="text-gray-600 text-sm">
-                  Extracts theorems and relevant context using LLM-driven patterns (Gemini series), ensuring each fragment is self-contained.
+              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+                <div class="text-blue-600 font-bold text-xl mb-2 flex items-center">
+                  <span class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">2</span>
+                  Context-Segmentation
+                </div>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Isolates theorems and their surrounding contexts using a hybrid Regex+LLM engine. It expertly untangles nested <em>"umbrella" proofs</em>, extracts block equations, and compiles a Global Notation Reference Table.
                 </p>
               </div>
 
-              <!-- Step 3 -->
-              <div class="bg-neutral rounded-lg border border-gray-200 p-5">
-                <h4 class="font-medium text-gray-900 mb-2">3. Problem Generation</h4>
-                <p class="text-gray-600 text-sm">
-                  Transforms theorems and context into QA pairs using GPT-5, following rules for difficulty, self-containment, single-answer constraints, and quantitative verifiability.
+              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+                <div class="text-blue-600 font-bold text-xl mb-2 flex items-center">
+                  <span class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">3</span>
+                  Dependency Parsing
+                </div>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Establishes the logical topology between theoretical elements. It precisely maps internal cross-theorem links, non-theorem structural premises (e.g., Assumptions, Definitions), and external literature citations.
                 </p>
               </div>
 
-              <!-- Step 4 -->
-              <div class="bg-neutral rounded-lg border border-gray-200 p-5">
-                <h4 class="font-medium text-gray-900 mb-2">4. Quality Control</h4>
-                <p class="text-gray-600 text-sm">
-                  Automated validation with GPT-5 checks rubric compliance and consistency before human review.
+              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+                <div class="text-blue-600 font-bold text-xl mb-2 flex items-center">
+                  <span class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">4</span>
+                  Pair Synthesis
+                </div>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Generates self-contained theorem-proof setups. Employs a strict <em>Context-Aware Patching</em> mechanism and a <em>Zero-Deletion Policy</em> to expand derivation steps safely without losing original textual integrity.
                 </p>
               </div>
 
-              <!-- Step 5 -->
-              <div class="bg-neutral rounded-lg border border-gray-200 p-5">
-                <h4 class="font-medium text-gray-900 mb-2">5. Human Check & Feedback</h4>
-                <p class="text-gray-600 text-sm">
-                  Experts verify semantic correctness, difficulty, and dataset classification. Feedback is used to improve agents iteratively.
+              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+                <div class="text-blue-600 font-bold text-xl mb-2 flex items-center">
+                  <span class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">5</span>
+                  QA Generation
+                </div>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Scales problems into Easy, Medium, and Hard variants based on the dependency graph. Features a <strong>Non-Refine Mode</strong> for absolute text fidelity and a <strong>Refine Mode</strong> for LLM-smoothed, standardized logical flow.
+                </p>
+              </div>
+
+              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+                <div class="text-blue-600 font-bold text-xl mb-2 flex items-center">
+                  <span class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">6</span>
+                  Quality Validation
+                </div>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Embeds secondary LLM audits to rigorously check proof completeness, logical sufficiency, and difficulty consistency, complemented by a Human-in-the-Loop feedback system to optimize upstream prompts.
                 </p>
               </div>
             </div>
 
-            <p class="text-gray-700 mt-8">
-              This pipeline enables fully automated conversion of scholarly materials into standardized, high-quality evaluation datasets for statistical reasoning tasks.
-            </p>
-
-            <!-- Pipeline Figure -->
-            <div class="text-center mt-8">
-              <img src="images/pipeline.png" alt="StatEval data processing pipeline" class="mx-auto rounded-lg shadow-md" style="max-width: 800px;">
-              <p class="text-gray-500 text-sm mt-2">
-                Illustration of the <strong>StatEval</strong> data processing pipeline.
+            <div class="text-center mt-12 bg-white p-4 rounded-xl">
+              <object data="images/pipeline.pdf" type="application/pdf" class="mx-auto rounded-xl shadow-lg border border-gray-100 w-full" style="max-width: 1200px; height: 600px;">
+                  <img src="images/pipeline.pdf" alt="StatEval data processing pipeline" class="mx-auto rounded-xl shadow-lg border border-gray-100 w-full" style="max-width: 1200px;">
+              </object>
+              <p class="text-gray-500 text-sm mt-4 italic">
+                Illustration of the <strong>StatEval</strong> data processing pipeline, showcasing the hybrid extraction and dual-mode generation workflow.
               </p>
             </div>
           </div>
-
 
 
           <!-- ========================================= -->
           <!-- 🧩 Evaluation Methodology Section -->
           <!-- ========================================= -->
-          <div class="bg-white border border-gray-200 rounded-lg p-6 md:p-8 shadow-sm mb-10">
-            <h3 class="text-xl font-semibold mb-4">2. Evaluation Methodology</h3>
+          <div class="bg-white border border-gray-200 rounded-xl p-6 md:p-10 shadow-sm mb-10">
+            <h3 class="text-2xl font-bold mb-4 text-gray-900">2. Evaluation Protocol</h3>
 
-            <p class="text-gray-700 mb-6">
-              Open-ended questions, including those from both the <strong>Foundational Knowledge</strong> and <strong>Statistical Research</strong> datasets, are evaluated through a process-based scoring pipeline designed to assess both final correctness and the quality of intermediate reasoning.
+            <p class="text-gray-700 mb-6 text-lg">
+              To ensure rigorous and interpretable evaluation, <strong>StatEval</strong> implements distinct scoring mechanisms tailored to problem structures, powered by <strong>GPT-5.4-mini</strong> as the judging model. While Multiple-Choice Questions are graded via exact matching (0 or 1), Open-Ended questions utilize an <strong>Adaptive Process-Based Scoring Pipeline</strong>.
             </p>
 
-            <!-- Evaluation Steps (Single Column) -->
-            <div class="space-y-5 mt-6">
-              <div class="bg-neutral rounded-lg border border-gray-200 p-5">
-                <h4 class="font-medium text-gray-900 mb-2">1. Reasoning Step Extraction</h4>
-                <p class="text-gray-600 text-sm">
-                  The model’s response is parsed to identify key reasoning steps, including assumptions, logical transitions, and intermediate derivations. This reconstructs the complete reasoning chain to capture how the final result is obtained.
+            <div class="space-y-6 mt-8">
+              
+              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-blue-500"></div>
+                <h4 class="font-bold text-gray-900 mb-3 text-lg">Phase 1: Logic Alignment & Routing</h4>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Mathematical proofs often allow for multiple valid solution paths. To avoid unfairly penalizing correct but non-standard derivations, a Selector LLM compares the student's problem-solving logic with the reference solution. The response is categorized as either <strong>Aligned</strong> (following the reference strategy) or <strong>Divergent</strong> (employing an alternative method). This ensures the response is routed to the most appropriate evaluation mechanism.
                 </p>
               </div>
 
-              <div class="bg-neutral rounded-lg border border-gray-200 p-5">
-                <h4 class="font-medium text-gray-900 mb-2">2. Outcome Extraction</h4>
-                <p class="text-gray-600 text-sm">
-                  Each reasoning step is further analyzed to extract quantitative or symbolic outcomes (e.g., computed values, derived expressions, identified distributions), ensuring that both logic and intermediate results are available for verification.
+              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-teal-500"></div>
+                <h4 class="font-bold text-gray-900 mb-3 text-lg">Phase 2A: Granular Step-Based Verification <span class="text-teal-600 text-sm font-medium ml-2">(For Aligned Paths)</span></h4>
+                <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                  For strategically aligned responses, the system emulates human expert grading by decoupling the assessment into <strong>Decomposition</strong> and <strong>Evaluation</strong>. The reference is parsed into a 10-point <em>Grading Rubric</em> of atomic logical steps. The rubric adapts based on problem difficulty:
                 </p>
+                <ul class="list-disc list-inside text-sm text-gray-700 space-y-2 ml-2">
+                  <li><strong>Easy:</strong> Focuses directly on the terminal proof process and logical transitions.</li>
+                  <li><strong>Medium:</strong> Allocates 50% weight to the derivation of prerequisite lemmas, and 50% to the primary research result.</li>
+                  <li><strong>Hard:</strong> Evaluates the entire independent reasoning chain without pre-defined weight splits, emphasizing global coherence.</li>
+                </ul>
               </div>
 
-              <div class="bg-neutral rounded-lg border border-gray-200 p-5">
-                <h4 class="font-medium text-gray-900 mb-2">3. LLM Judging</h4>
-                <p class="text-gray-600 text-sm">
-                  A dedicated LLM evaluator compares the extracted reasoning steps and outcomes with the reference solution, verifying correctness, necessity, and logical consistency of each step.
+              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-purple-500"></div>
+                <h4 class="font-bold text-gray-900 mb-3 text-lg">Phase 2B: Independent Path Verification <span class="text-purple-600 text-sm font-medium ml-2">(For Divergent Paths)</span></h4>
+                <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                  For valid alternative methodologies, the reference solution is bypassed. The system strictly verifies if preconditions for invoked theorems are met (penalizing forced conclusions) and evaluates the custom trajectory across two core dimensions:
                 </p>
-              </div>
-
-              <div class="bg-neutral rounded-lg border border-gray-200 p-5">
-                <h4 class="font-medium text-gray-900 mb-2">4. Scoring</h4>
-                <p class="text-gray-600 text-sm mb-3">
-                  Each step is assigned binary scores along three dimensions: Reasoning Accuracy, Step Completeness, and Final Answer Correctness. Aggregated scores for one evaluation pass are computed as:
-                </p>
-                <div class="bg-neutral rounded-lg p-4 mb-3 text-center">
-                  <p class="text-gray-800 font-medium">S<sub>final</sub><sup>(i)</sup> = α S<sub>r</sub><sup>(i)</sup> + β S<sub>s</sub><sup>(i)</sup> + (1 - α - β) S<sub>a</sub><sup>(i)</sup></p>
-                </div>
-                <p class="text-gray-600 text-sm mb-2">
-                  With α = 0.4, β = 0.3, and binary scores S<sub>r</sub><sup>(i)</sup>, S<sub>s</sub><sup>(i)</sup>, S<sub>a</sub><sup>(i)</sup> ∈ {0,1}. Scoring is repeated three times, and the final score is:
-                </p>
-                <div class="bg-neutral rounded-lg p-4 text-center">
-                  <p class="text-gray-800 font-medium">S<sub>final</sub> = min{S<sub>final</sub><sup>(1)</sup>, S<sub>final</sub><sup>(2)</sup>, S<sub>final</sub><sup>(3)</sup>}</p>
+                <ul class="list-disc list-inside text-sm text-gray-700 space-y-2 ml-2 mb-6">
+                  <li><strong>Logical Coherence (S<sub>logic</sub>):</strong> Validity of the overarching proof strategy and step transitions.</li>
+                  <li><strong>Technical Precision (S<sub>tech</sub>):</strong> Algebraic and analytical accuracy of intermediate derivations.</li>
+                </ul>
+                
+                <div class="bg-white rounded-lg border border-gray-200 p-4 flex flex-col md:flex-row gap-6 justify-center items-center">
+                  <div class="text-center w-full md:w-auto">
+                    <span class="block text-xs text-gray-500 uppercase tracking-wider mb-2 font-semibold">Standard Proofs</span>
+                    <code class="text-sm md:text-base font-bold text-gray-800 bg-gray-100 px-4 py-2 rounded-md shadow-inner block">
+                      S<sub>final</sub> = w<sub>1</sub>S<sub>logic</sub> + w<sub>2</sub>S<sub>tech</sub>
+                    </code>
+                  </div>
+                  <div class="hidden md:block text-gray-300 text-2xl font-light">|</div>
+                  <div class="text-center w-full md:w-auto">
+                    <span class="block text-xs text-gray-500 uppercase tracking-wider mb-2 font-semibold">Quantitative Derivations</span>
+                    <code class="text-sm md:text-base font-bold text-gray-800 bg-gray-100 px-4 py-2 rounded-md shadow-inner block">
+                      S<sub>final</sub> = w<sub>1</sub>S<sub>logic</sub> + w<sub>2</sub>S<sub>tech</sub> + w<sub>3</sub>S<sub>result</sub>
+                    </code>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <p class="text-gray-700 mt-6">
-              This four-step design separates reasoning reconstruction from correctness judgment, enabling fine-grained and interpretable evaluation. The framework outputs two complementary indicators: (1) a <em>final score</em> reflecting overall correctness, and (2) a <em>process score</em> reflecting reasoning quality and stepwise consistency.
-            </p>
-
-            <!-- Pipeline Figure -->
-            <div class="text-center mt-6">
-              <img src="images/eval_pipeline.png" alt="StatEval evaluation pipeline" class="mx-auto rounded-lg shadow-md" style="max-width: 800px;">
-              <p class="text-gray-500 text-sm mt-2">
-                Illustration of the evaluation pipeline for open-ended questions in StatEval.
+            <div class="text-center mt-10 bg-white p-4 rounded-xl border border-gray-100 flex justify-center items-center" style="height: 350px;">
+              <object data="images/eval_pipeline.pdf" type="application/pdf" class="rounded-lg shadow-md" style="max-width: 1000px; width: 100%; height: 100%;">
+                  <img src="images/eval_pipeline.pdf" alt="StatEval Adaptive Evaluation pipeline" class="mx-auto rounded-lg shadow-md" style="max-width: 1000px;">
+              </object>
+            </div>
+             <p class="text-gray-500 text-sm mt-2 italic text-center">
+                Illustration of the <strong>Adaptive Process-Based Scoring Pipeline</strong> for open-ended questions in StatEval.
               </p>
-            </div>
           </div>
-
 
           <!-- ========================================= -->
           <!-- 🔁 Reproducibility Details Section -->
           <!-- ========================================= -->
-          <div class="bg-white border border-gray-200 rounded-lg p-6 md:p-8 shadow-sm">
-            <h3 class="text-xl font-semibold mb-4">3. Reproducibility Details</h3>
+          <section id="reproducibility" class="py-16 md:py-20 bg-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-white border border-gray-200 rounded-xl p-6 md:p-10 shadow-sm max-w-5xl mx-auto">
+      <h3 class="text-2xl font-bold mb-6 text-gray-900">3. Reproducibility Details</h3>
 
-            <p class="text-gray-700 mb-6">
-              All benchmark resources of <strong>StatEval</strong> are publicly available to ensure transparency and reproducibility.  
-              The two test datasets can be accessed via Hugging Face, while implementation details, evaluation scripts, and prompt templates 
-              are available on GitHub.
-            </p>
+      <p class="text-gray-700 mb-8 text-lg">
+        All benchmark resources of <strong>StatEval</strong> are publicly available to ensure transparency and reproducibility. 
+        A representative partial <strong>test set (Demo)</strong> can be accessed on Hugging Face, while implementation details and evaluation scripts are being prepared for GitHub.
+      </p>
 
-            <!-- Dataset Links -->
-            <div class="grid sm:grid-cols-2 gap-6 mb-8">
-              <div class="bg-neutral rounded-lg border border-gray-200 p-5">
-                <h4 class="font-medium text-gray-900 mb-2">📘 Foundational Knowledge Dataset</h4>
-                <p class="text-gray-700 text-sm mb-2">
-                  Undergraduate and graduate-level statistical questions from textbooks, exams, and curated teaching materials.
-                </p>
-                <a 
-                  href="https://huggingface.co/datasets/0v01111/StatEval-Foundational-knowledge" 
-                  target="_blank"
-                  class="text-blue-600 hover:underline text-sm font-medium"
-                >
-                  → View on Hugging Face
-                </a>
+      <div class="grid sm:grid-cols-2 gap-6 mb-10">
+        <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 flex flex-col">
+          <h4 class="font-bold text-gray-900 mb-3 flex items-center">
+            <span class="mr-2">📘</span> Foundational Knowledge Demo
+          </h4>
+          <p class="text-gray-600 text-sm mb-4 flex-grow">
+            A sample of <strong>300 questions</strong> assessing mastery of classic statistical concepts and complex calculations across undergraduate and graduate levels.
+          </p>
+          <a href="https://huggingface.co/datasets/StatAILab/StatEval" target="_blank" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold text-sm transition-colors">
+            View on Hugging Face <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </a>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 flex flex-col">
+          <h4 class="font-bold text-gray-900 mb-3 flex items-center">
+            <span class="mr-2">📗</span> Statistical Research Demo
+          </h4>
+          <p class="text-gray-600 text-sm mb-4 flex-grow">
+            Includes <strong>100 unique research problems</strong> (300 variants) focusing on multi-step formal reasoning from top-tier statistical journals.
+          </p>
+          <a href="https://huggingface.co/datasets/StatAILab/StatEval" target="_blank" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold text-sm transition-colors">
+            View on Hugging Face <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-100 pt-10">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div class="bg-blue-50/50 rounded-xl border border-blue-100 p-6">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 bg-blue-100 p-3 rounded-lg">
+                <svg class="w-6 h-6 text-blue-700" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.414-4.041-1.414-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
               </div>
-
-              <div class="bg-neutral rounded-lg border border-gray-200 p-5">
-                <h4 class="font-medium text-gray-900 mb-2">📗 Statistical Research Dataset</h4>
-                <p class="text-gray-700 text-sm mb-2">
-                  Proof-based and theoretical problems extracted from peer-reviewed research papers, covering advanced statistical subfields.
-                </p>
-                <a 
-                  href="https://huggingface.co/datasets/0v01111/StatEval-Statistical-Research" 
-                  target="_blank"
-                  class="text-blue-600 hover:underline text-sm font-medium"
-                >
-                  → View on Hugging Face
+              <div class="ml-4">
+                <h4 class="text-gray-900 font-bold mb-1 text-lg">Implementation & Code</h4>
+                <p class="text-gray-600 text-sm mb-3">Reproducibility scripts are currently being prepared.</p>
+                <a href="https://github.com/StatAI-Lab/StatEval" target="_blank" class="text-blue-700 hover:text-blue-900 font-bold text-sm inline-flex items-center">
+                  Visit GitHub Repository <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                 </a>
               </div>
             </div>
+          </div>
 
-            <!-- GitHub Repository -->
-            <div class="bg-neutral rounded-lg border border-gray-200 p-5 text-center">
-              <h4 class="font-medium text-gray-900 mb-2">🧩 Implementation & Evaluation Code</h4>
-              <p class="text-gray-700 text-sm mb-3">
-                The full implementation, evaluation pipeline, and reproducibility instructions can be found on GitHub:
-              </p>
-              <a 
-                href="https://github.com/StatEval/StatEval" 
-                target="_blank"
-                class="text-blue-600 hover:underline text-sm font-medium"
-              >
-                → Visit GitHub Repository
+          <div class="bg-gray-50 rounded-xl border border-gray-200 p-6">
+            <h4 class="text-gray-900 font-bold mb-2 flex items-center">
+              <span class="mr-2">📬</span> Full Dataset Access
+            </h4>
+            <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+              To request access to the <strong>complete test data</strong> or <strong>training data</strong>, please contact us:
+            </p>
+            <div class="flex items-center space-x-2">
+              <span class="text-gray-400 text-xs font-medium uppercase tracking-wider">Email:</span>
+              <a href="mailto:zhoufan@mail.shufe.edu.cn" class="text-blue-600 font-mono text-sm hover:underline font-semibold">
+                zhoufan@mail.shufe.edu.cn
               </a>
             </div>
           </div>
+        </div>
 
-          <div class="mt-12 pt-6 border-t border-gray-200 text-center">
-            <p class="text-sm text-gray-600">
-              <strong>Code coming soon</strong> — Our paper is temporarily hosted on our GitHub repository, and the code is currently being prepared. For questions or early access requests, please contact us at: 
-              <a href="mailto:zhoufan@mail.shufe.edu.cn" class="text-primary hover:underline">zhoufan@mail.shufe.edu.cn</a>
-            </p>
-          </div>
+        <div class="mt-8 text-center">
+          <p class="text-xs text-gray-400 italic">
+            * The updated paper detailing the full methodology and data distribution is currently in progress.
+          </p>
+        </div>
       </div>
-  </section>
+    </div>
+  </div>
+</section>
 
   <script>
       // Evaluation tab switching functionality
@@ -1039,6 +824,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
-
-
-
