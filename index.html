@@ -4,823 +4,932 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>StatEval</title>
-  <!-- 引入Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- 引入Font Awesome -->
-  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <!-- 引入Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
-  <!-- 引入Google字体 -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Tailwind配置 -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#0F4C81',
-            secondary: '#2A70B9',
-            neutral: '#F5F7FA',
-            dark: '#2C3E50'
-          },
-          fontFamily: {
-            inter: ['Inter', 'sans-serif'],
-          },
-        },
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #647087;
+      --line: #d9e0ea;
+      --soft: #f5f8fb;
+      --paper: #ffffff;
+      --blue: #155e9f;
+      --blue-soft: #e8f1fb;
+      --green: #0f766e;
+      --amber: #9a5b12;
+      --shadow: 0 16px 40px rgba(23, 32, 51, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 34px;
+      align-items: center;
+      padding: 48px 0 42px;
+    }
+
+    .logo {
+      width: 172px;
+      height: 172px;
+      object-fit: contain;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 920px;
+      margin-bottom: 16px;
+      font-size: 44px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 880px;
+      margin-bottom: 22px;
+      color: #425067;
+      font-size: 18px;
+    }
+
+    .actions,
+    .nav-pills,
+    .tabs,
+    .metric-grid,
+    .figure-grid,
+    .case-grid,
+    .step-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 9px 15px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font-weight: 750;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      border-color: #aebdd0;
+      background: #f9fbfd;
+    }
+
+    .button.primary {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .button.primary:hover {
+      background: #0f4f88;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav .shell {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 58px;
+    }
+
+    .brand {
+      font-weight: 850;
+      color: var(--blue);
+    }
+
+    .nav-pills {
+      gap: 6px;
+    }
+
+    .nav-pills a {
+      padding: 8px 10px;
+      border-radius: 7px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 720;
+    }
+
+    .nav-pills a:hover {
+      background: var(--soft);
+      color: var(--ink);
+    }
+
+    section {
+      padding: 62px 0;
+    }
+
+    section.soft {
+      background: var(--soft);
+    }
+
+    .section-head {
+      display: flex;
+      gap: 20px;
+      align-items: end;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      margin-bottom: 8px;
+      font-size: 30px;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+
+    .section-head p,
+    .section-copy {
+      max-width: 760px;
+      color: var(--muted);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-bottom: 22px;
+    }
+
+    .metric,
+    .panel,
+    .figure-card,
+    .case-card,
+    .step-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .metric {
+      padding: 17px;
+    }
+
+    .metric strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--blue);
+      font-size: 28px;
+      line-height: 1.1;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .panel {
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .tabs {
+      margin-bottom: 16px;
+    }
+
+    .tab {
+      min-height: 38px;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 780;
+    }
+
+    .tab.active {
+      border-color: var(--blue);
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 860px;
+      border-collapse: collapse;
+      background: #fff;
+    }
+
+    th,
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+
+    th {
+      background: #f6f8fb;
+      color: #526078;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    td:first-child,
+    td:nth-child(2),
+    th:first-child,
+    th:nth-child(2) {
+      text-align: left;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    tbody tr:hover td {
+      background: #fafcff;
+    }
+
+    .rank {
+      color: var(--muted);
+      font-weight: 850;
+    }
+
+    .model {
+      font-weight: 820;
+    }
+
+    .score {
+      color: var(--blue);
+      font-weight: 850;
+    }
+
+    .note {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .figure-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+    }
+
+    .figure-grid.figure-stack {
+      grid-template-columns: 1fr;
+    }
+
+    .figure-card {
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .figure-card.wide {
+      grid-column: 1 / -1;
+    }
+
+    .figure-media {
+      display: block;
+      width: 100%;
+      border: 0;
+      background: #f1f5f9;
+    }
+
+    img.figure-media {
+      height: auto;
+      object-fit: contain;
+    }
+
+    .figure-stack .figure-media {
+      width: 100%;
+    }
+
+    .figure-stack .figure-card {
+      width: min(100%, 1080px);
+      margin: 0 auto;
+    }
+
+    .figure-stack .figure-card.wide {
+      width: 100%;
+    }
+
+    .caption {
+      padding: 13px 15px 15px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .caption strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--ink);
+      font-size: 15px;
+    }
+
+    .dataset-columns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .dataset-box {
+      border-left: 4px solid var(--blue);
+      padding: 18px;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 10px 26px rgba(23, 32, 51, 0.05);
+    }
+
+    .dataset-box.research {
+      border-left-color: var(--green);
+    }
+
+    .dataset-box h3 {
+      margin-bottom: 9px;
+      font-size: 20px;
+    }
+
+    .dataset-box ul {
+      margin: 0;
+      padding-left: 20px;
+      color: #475569;
+    }
+
+    .case-grid,
+    .step-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .case-card,
+    .step-card {
+      padding: 16px;
+    }
+
+    .case-card h3,
+    .step-card h3 {
+      margin-bottom: 6px;
+      font-size: 17px;
+    }
+
+    .case-card p,
+    .step-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .example-image {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .footer {
+      padding: 34px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      background: #fff;
+      font-size: 14px;
+    }
+
+    @media (max-width: 920px) {
+      .hero-inner,
+      .dataset-columns,
+      .figure-grid,
+      .case-grid,
+      .step-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-inner {
+        text-align: center;
+      }
+
+      .logo {
+        margin: 0 auto;
+      }
+
+      .actions {
+        justify-content: center;
+      }
+
+      .metric-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .section-head {
+        display: block;
       }
     }
-  </script>
-  
-  <!-- 自定义样式 -->
-  <style type="text/tailwindcss">
-    @layer utilities {
-      .content-auto {
-        content-visibility: auto;
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100% - 24px, 1180px);
       }
-      .border-thin {
-        border-width: 0.5px;
+
+      .hero-inner {
+        padding: 34px 0;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      .lead {
+        font-size: 16px;
+      }
+
+      .nav .shell {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 10px 0;
+      }
+
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 44px 0;
       }
     }
   </style>
 </head>
-
-<body class="font-inter text-dark bg-white">
-  <!-- 头部信息 -->
-  <header class="py-12 border-b border-gray-200">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col items-center">
-        <!-- Logo部分 -->
-        <div class="flex items-center mb-2 leading-none">
-          <a href="#" class="flex items-center">
-            <img 
-              src="images/logo.png" 
-              alt="StatEval Logo" 
-              class="w-64 h-64 md:w-72 md:h-72 object-contain block" 
-            />
-          </a>
+<body>
+  <header class="hero">
+    <div class="shell hero-inner">
+      <img class="logo" src="images/logo.png" alt="StatEval logo">
+      <div>
+        <p class="eyebrow">Statistical Reasoning Benchmark</p>
+        <h1>StatEval: A Comprehensive Benchmark for Large Language Models in Statistics</h1>
+        <p class="lead">
+          StatEval evaluates large language models across textbook-level statistical knowledge and frontier research-level proof tasks, with a TRACE pipeline for extracting self-contained theorem reasoning data from statistical literature.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="#leaderboard">View Leaderboard</a>
+          <a class="button" href="https://arxiv.org/abs/2510.09517" target="_blank" rel="noreferrer">Paper</a>
+          <a class="button" href="https://huggingface.co/datasets/StatAILab/StatEval" target="_blank" rel="noreferrer">Hugging Face</a>
+          <a class="button" href="https://github.com/StatAI-Lab/StatEval" target="_blank" rel="noreferrer">GitHub</a>
         </div>
-
-        <!-- 论文标题 -->
-        <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-6 text-dark max-w-4xl leading-tight">
-          StatEval: A Comprehensive Benchmark for Large Language Models in Statistics
-        </h1>
-        
-        <!-- 链接 -->
-        <div class="flex flex-wrap justify-center gap-6 mb-8">
-          <a href="https://arxiv.org/abs/2510.09517" class="text-primary hover:text-secondary flex items-center transition-colors text-lg">
-            <i class="fa fa-file-pdf-o mr-2"></i> Paper
-          </a>
-          <a href="https://github.com/StatAI-Lab/StatEval" target="_blank" class="text-primary hover:text-secondary flex items-center transition-colors text-lg">
-            <i class="fa fa-github mr-2"></i> GitHub
-          </a>
-        </div>
-        
-        <!-- 简短介绍 -->
-        <p class="text-gray-700 text-center max-w-3xl mb-2 text-base">
-          <strong>StatEval</strong>, developed by the team of Professor Fan Zhou at Shanghai University of Finance and Economics, is the first benchmark systematically organized along both <strong>difficulty</strong> and <strong>disciplinary</strong> axes to evaluate large language models’ statistical reasoning.
-        </p>
-        <p class="text-gray-700 text-center max-w-3xl mb-2 text-base">
-          It includes a <strong>Foundational Knowledge Dataset</strong> comprising exactly <strong>22,262</strong> problems (<strong>9,382</strong> undergraduate and <strong>12,880</strong> graduate instances) curated from 76 classical textbooks and extensive exam collections.
-        </p>
-        <p class="text-gray-700 text-center max-w-3xl mb-4 text-base">
-          Furthermore, it features a <strong>Statistical Research Dataset</strong> consisting of <strong>84,179</strong> proof-based tasks derived from <strong>6,953</strong> high-impact research articles (published between 2000 and 2025). These tasks are categorized by derivation difficulty into <strong>40,366</strong> Easy, <strong>22,013</strong> Medium, and <strong>21,800</strong> Hard problems.
-        </p>
-        <p class="text-gray-700 text-center max-w-3xl mb-4 text-base">
-          A representative partial <strong>test set</strong> (Demo) is publicly available and can be accessed on Hugging Face:
-        </p>
-        <p class="text-gray-700 text-center max-w-3xl text-base">
-          🤗 <strong>StatEval Demo Dataset</strong>: 
-          <a href="https://huggingface.co/datasets/StatAILab/StatEval" target="_blank" class="text-blue-600 hover:underline font-medium">
-            View on Hugging Face
-          </a>
-        </p>
       </div>
     </div>
   </header>
 
-  <!-- ====================== -->
-  <!-- 📊 StatEval Overview + Datasets (Unified Layout) -->
-  <!-- ====================== -->
-  <section class="py-12 bg-neutral">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-
-      <h2 class="text-2xl font-semibold text-center mb-6 text-gray-800">
-        A big picture of the StatEval Benchmark
-      </h2>
-
-      <div class="flex justify-center mb-4">
-        <img 
-          src="images/overview.png" 
-          alt="StatEval Overview Diagram" 
-          class="max-w-full h-auto opacity-80"
-          style="max-width: 800px;" 
-        >
-      </div>
-
-      <p class="text-center text-gray-600 mb-10 max-w-4xl mx-auto text-sm sm:text-base">
-        Overall structure of the <strong>StatEval</strong> benchmark, 
-        showing the two datasets — <strong>Foundational Knowledge</strong> and <strong>Statistical Research</strong> — 
-        along with their hierarchical organization and representative task examples.<br>
-        <span class="italic text-red-500 text-xs">(*Note: This overview diagram reflects a previous version and is currently being updated to match the latest dataset scaling.)</span>
-      </p>
-
-      <h3 class="text-2xl font-semibold mb-4 text-center text-gray-900">
-        Foundational Knowledge Dataset
-      </h3>
-      <p class="text-gray-700 text-sm mb-6 max-w-4xl mx-auto text-center">
-          - <strong>9,382</strong> undergraduate-level questions (e.g., elementary probability, linear regression, basic ML).<br>
-          - <strong>12,880</strong> graduate-level questions (e.g., advanced probability, empirical processes, causal inference).<br>
-          - Sourced from <strong>76</strong> classical textbooks, preliminary exams, and curated course materials.
-      </p>
-
-      <div class="flex justify-center mb-4">
-        <img 
-          src="images/foundational.png" 
-          alt="Foundational Knowledge Dataset Composition and Distribution" 
-          class="max-w-full h-auto opacity-80"
-          style="max-width: 800px;" 
-        >
-      </div>
-      <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto text-sm sm:text-base">
-        Composition and distribution of the <strong>Foundational Knowledge Dataset</strong>, 
-        showing proportions across subfields, educational levels, and problem formats.<br>
-        <span class="italic text-red-500 text-xs">(*Note: The statistics in this figure are from an older version and are currently being updated.)</span>
-      </p>
-
-      <h3 class="text-2xl font-semibold mb-4 text-center text-gray-900">
-        Statistical Research Dataset
-      </h3>
-      <p class="text-gray-700 text-sm mb-6 max-w-4xl mx-auto text-center">
-          - <strong>84,179</strong> proof-based tasks (extracted from <strong>6,953</strong> high-impact journal articles published between 2000-2025).<br>
-          - Categorized by derivation difficulty: <strong>40,366</strong> Easy, <strong>22,013</strong> Medium, and <strong>21,800</strong> Hard.<br>
-          - 8 theoretical property categories (e.g., asymptotic properties, optimality results, identifiability).
-      </p>
-
-      <div class="flex justify-center mb-4">
-        <img 
-          src="images/research.png" 
-          alt="Statistical Research Dataset Composition and Distribution" 
-          class="max-w-full h-auto opacity-80"
-          style="max-width: 800px;" 
-        >
-      </div>
-      <p class="text-center text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
-        Composition and distribution of the <strong>Statistical Research Dataset</strong>, 
-        illustrating coverage across research subdomains and theoretical property categories.<br>
-        <span class="italic text-red-500 text-xs">(*Note: The statistics in this figure are from an older version and are currently being updated.)</span>
-      </p>
-
-    </div>
-  </section>
-
-
-
-
-<section id="leaderboard" class="py-16 md:py-24 bg-neutral/50">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4 text-gray-900">Leaderboard</h2>
-            <p class="text-lg text-gray-600">Performance comparison of various models on two datasets across different statistical topics and difficulty levels.</p>
-        </div>
-        
-        <div class="mb-10 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-            <div class="flex flex-wrap gap-6 items-center justify-center sm:justify-start">
-                <div class="flex items-center">
-                    <label class="mr-3 font-medium text-gray-700">Dataset:</label>
-                    <select id="dataset-type" class="border border-gray-300 rounded-lg px-4 py-2 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all cursor-pointer text-gray-700">
-                        <option value="foundational">Foundational Knowledge Dataset</option>
-                        <option value="research">Statistical Research Dataset</option>
-                    </select>
-                </div>
-                
-                <div id="category-filter-container" class="flex items-center transition-opacity duration-300">
-                    <label class="mr-3 font-medium text-gray-700" id="category-label">Level:</label>
-                    <select id="category-type" class="border border-gray-300 rounded-lg px-4 py-2 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all cursor-pointer text-gray-700">
-                        <option value="undergraduate">Undergraduate</option>
-                        <option value="graduate">Graduate</option>
-                        <option value="overall">Overall</option>
-                    </select>
-                </div>
-                
-                <div class="flex items-center ml-auto">
-                    <button id="refresh-ranking" class="flex items-center px-4 py-2 text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors font-medium">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                        Refresh View
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <div class="space-y-8">
-            <div id="foundational-results" class="space-y-8 transition-all duration-500">
-                
-                <div id="undergraduate-table" class="bg-white rounded-xl shadow-md border border-gray-100 p-6">
-                    <div class="flex justify-between items-center mb-6 flex-wrap gap-4">
-                        <h3 class="text-xl font-bold text-gray-800">Undergraduate Performance</h3>
-                        <div class="text-sm px-3 py-1 bg-gray-100 rounded-full text-gray-500 font-medium">
-                            Updated: <span>2026-04</span>
-                        </div>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50/80">
-                                <tr>
-                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider rounded-tl-lg">Rank</th>
-                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Model</th>
-                                    <th scope="col" class="px-8 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="2">Probability <i></i></th>
-                                    <th scope="col" class="px-8 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="3">Statistics <i></i></th>
-                                    <th scope="col" class="px-8 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="4">Machine Learning <i></i></th>
-                                    <th scope="col" class="px-8 py-4 text-center text-xs font-bold text-blue-700 uppercase tracking-wider bg-blue-50 cursor-pointer sortable hover:bg-blue-100 transition-colors rounded-tr-lg" data-col="5">Undergrad Mean <i></i></th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-100"></tbody>
-                        </table>
-                    </div>
-                </div>
-                
-                <div id="graduate-table" class="bg-white rounded-xl shadow-md border border-gray-100 p-6 hidden">
-                    <div class="flex justify-between items-center mb-6 flex-wrap gap-4">
-                        <h3 class="text-xl font-bold text-gray-800">Graduate Performance</h3>
-                        <div class="text-sm px-3 py-1 bg-gray-100 rounded-full text-gray-500 font-medium">
-                            Updated: <span>2026-04</span>
-                        </div>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50/80">
-                                <tr>
-                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider rounded-tl-lg">Rank</th>
-                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Model</th>
-                                    <th scope="col" class="px-8 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="2">Probability <i></i></th>
-                                    <th scope="col" class="px-8 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="3">Statistics <i></i></th>
-                                    <th scope="col" class="px-8 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="4">Machine Learning <i></i></th>
-                                    <th scope="col" class="px-8 py-4 text-center text-xs font-bold text-blue-700 uppercase tracking-wider bg-blue-50 cursor-pointer sortable hover:bg-blue-100 transition-colors rounded-tr-lg" data-col="5">Graduate Mean <i></i></th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-100"></tbody>
-                        </table>
-                    </div>
-                </div>
-                
-                <div id="overall-table" class="bg-white rounded-xl shadow-md border border-gray-100 p-6 hidden">
-                    <div class="flex justify-between items-center mb-6 flex-wrap gap-4">
-                        <h3 class="text-xl font-bold text-gray-800">Overall Performance (Foundational)</h3>
-                        <div class="text-sm px-3 py-1 bg-gray-100 rounded-full text-gray-500 font-medium">
-                            Updated: <span>2026-04</span>
-                        </div>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50/80">
-                                <tr>
-                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider rounded-tl-lg">Rank</th>
-                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Model</th>
-                                    <th scope="col" class="px-10 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="2">Undergrad Mean <i></i></th>
-                                    <th scope="col" class="px-10 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="3">Graduate Mean <i></i></th>
-                                    <th scope="col" class="px-10 py-4 text-center text-xs font-bold text-blue-700 uppercase tracking-wider bg-blue-50 cursor-pointer sortable hover:bg-blue-100 transition-colors rounded-tr-lg" data-col="4">Overall Mean <i></i></th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-100"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="research-results" class="space-y-8 hidden transition-all duration-500">
-                <div id="research-difficulty-table" class="bg-white rounded-xl shadow-md border border-gray-100 p-6">
-                    <div class="flex justify-between items-center mb-6 flex-wrap gap-4">
-                        <h3 class="text-xl font-bold text-gray-800">Frontier Research Tasks by Difficulty</h3>
-                        <div class="text-sm px-3 py-1 bg-gray-100 rounded-full text-gray-500 font-medium">
-                            Updated: <span>2026-04</span>
-                        </div>
-                    </div>
-                    
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50/80">
-                                <tr>
-                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider rounded-tl-lg">Rank</th>
-                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Model</th>
-                                    <th scope="col" class="px-10 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="2">Easy <i></i></th>
-                                    <th scope="col" class="px-10 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="3">Medium <i></i></th>
-                                    <th scope="col" class="px-10 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider cursor-pointer sortable hover:bg-gray-100 transition-colors" data-col="4">Hard <i></i></th>
-                                    <th scope="col" class="px-10 py-4 text-center text-xs font-bold text-blue-700 uppercase tracking-wider bg-blue-50 cursor-pointer sortable hover:bg-blue-100 transition-colors rounded-tr-lg" data-col="5">Mean <i></i></th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-100"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<script>
-// --- Data Sources ---
-const foundationalData = [
-    { model: "Gemini-3.1-pro-preview", gProb: 82.58, gStat: 87.54, gMl: 89.14, gMean: 86.47, ugProb: 92.01, ugStat: 90.50, ugMl: 90.16, ugMean: 91.10, overallMean: 89.09 },
-    { model: "Qwen-3.6-plus", gProb: 80.83, gStat: 92.36, gMl: 82.77, gMean: 86.70, ugProb: 89.88, ugStat: 89.25, ugMl: 92.27, ugMean: 89.98, overallMean: 88.56 },
-    { model: "GPT-5.4", gProb: 86.89, gStat: 80.57, gMl: 91.09, gMean: 84.96, ugProb: 89.88, ugStat: 88.33, ugMl: 91.95, ugMean: 89.55, overallMean: 87.56 },
-    { model: "DeepSeek-Reasoner", gProb: 92.00, gStat: 88.79, gMl: 75.15, gMean: 86.47, ugProb: 90.16, ugStat: 85.84, ugMl: 84.56, ugMean: 87.51, overallMean: 87.06 },
-    { model: "Claude-opus-4.7", gProb: 89.67, gStat: 86.68, gMl: 76.81, gMean: 85.19, ugProb: 86.90, ugStat: 89.48, ugMl: 69.75, ugMean: 85.38, overallMean: 85.30 },
-    { model: "Doubao-seed-2.0-pro", gProb: 82.22, gStat: 82.55, gMl: 79.15, gMean: 81.64, ugProb: 80.52, ugStat: 73.30, ugMl: 85.56, ugMean: 78.28, overallMean: 79.74 },
-    { model: "Qwen3-4b", gProb: 69.65, gStat: 70.37, gMl: 55.53, gMean: 66.61, ugProb: 69.01, ugStat: 55.49, ugMl: 73.70, ugMean: 64.09, overallMean: 65.19 }
-];
-
-const researchData = [
-    { model: "GPT-5.4", easy: 68.28, medium: 65.45, hard: 51.27, mean: 61.67 },
-    { model: "DeepSeek-V3.2", easy: 58.11, medium: 54.03, hard: 40.60, mean: 51.03 },
-    { model: "Claude-opus-4.7", easy: 56.72, medium: 54.11, hard: 41.84, mean: 50.92 },
-    { model: "Qwen-3.6", easy: 55.42, medium: 51.92, hard: 40.12, mean: 49.17 },
-    { model: "Gemini-3.1-pro", easy: 55.92, medium: 49.13, hard: 37.27, mean: 47.55 },
-    { model: "Doubao-seed-2.0-pro", easy: 47.14, medium: 44.09, hard: 33.57, mean: 41.63 },
-    { model: "Qwen3-4b", easy: 28.55, medium: 23.91, hard: 17.31, mean: 23.26 }
-];
-
-// 预排序（按Mean倒序）
-foundationalData.sort((a, b) => b.overallMean - a.overallMean);
-researchData.sort((a, b) => b.mean - a.mean);
-
-function populateTables() {
-    // 1. Foundational - Undergraduate
-    const undergradTbody = document.querySelector('#undergraduate-table tbody');
-    undergradTbody.innerHTML = '';
-    foundationalData.forEach((item, index) => {
-        undergradTbody.innerHTML += `
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-500">${index + 1}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${item.model}</td>
-                <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.ugProb.toFixed(2)}</td>
-                <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.ugStat.toFixed(2)}</td>
-                <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.ugMl.toFixed(2)}</td>
-                <td class="px-8 py-4 whitespace-nowrap text-sm font-bold text-center text-blue-600 bg-blue-50/50">${item.ugMean.toFixed(2)}</td>
-            </tr>`;
-    });
-    
-    // 2. Foundational - Graduate
-    const gradTbody = document.querySelector('#graduate-table tbody');
-    gradTbody.innerHTML = '';
-    foundationalData.forEach((item, index) => {
-        gradTbody.innerHTML += `
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-500">${index + 1}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${item.model}</td>
-                <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.gProb.toFixed(2)}</td>
-                <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.gStat.toFixed(2)}</td>
-                <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.gMl.toFixed(2)}</td>
-                <td class="px-8 py-4 whitespace-nowrap text-sm font-bold text-center text-blue-600 bg-blue-50/50">${item.gMean.toFixed(2)}</td>
-            </tr>`;
-    });
-    
-    // 3. Foundational - Overall
-    const overallTbody = document.querySelector('#overall-table tbody');
-    overallTbody.innerHTML = '';
-    foundationalData.forEach((item, index) => {
-        overallTbody.innerHTML += `
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-500">${index + 1}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${item.model}</td>
-                <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.ugMean.toFixed(2)}</td>
-                <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.gMean.toFixed(2)}</td>
-                <td class="px-10 py-4 whitespace-nowrap text-sm font-bold text-center text-blue-600 bg-blue-50/50">${item.overallMean.toFixed(2)}</td>
-            </tr>`;
-    });
-    
-    // 4. Research - By Difficulty
-    const researchTbody = document.querySelector('#research-difficulty-table tbody');
-    researchTbody.innerHTML = '';
-    researchData.forEach((item, index) => {
-        researchTbody.innerHTML += `
-            <tr class="hover:bg-gray-50 transition-colors">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-500">${index + 1}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${item.model}</td>
-                <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.easy.toFixed(2)}</td>
-                <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.medium.toFixed(2)}</td>
-                <td class="px-10 py-4 whitespace-nowrap text-sm text-gray-600 text-center">${item.hard.toFixed(2)}</td>
-                <td class="px-10 py-4 whitespace-nowrap text-sm font-bold text-center text-blue-600 bg-blue-50/50">${item.mean.toFixed(2)}</td>
-            </tr>`;
-    });
-}
-
-// 纯原生 SVG 排序图标生成
-const sortAscIcon = `<svg class="w-3 h-3 inline-block ml-1 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path></svg>`;
-const sortDescIcon = `<svg class="w-3 h-3 inline-block ml-1 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>`;
-const sortNeutralIcon = `<svg class="w-3 h-3 inline-block ml-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>`;
-
-function initTableSorting() {
-    document.querySelectorAll('table').forEach(table => {
-        const headers = table.querySelectorAll('.sortable');
-        const tbody = table.querySelector('tbody');
-        if(headers.length === 0) return;
-        
-        let currentSort = { col: parseInt(headers[headers.length - 1].dataset.col), dir: 'desc' };
-
-        function updateSortIcons() {
-            headers.forEach(header => {
-                const col = parseInt(header.dataset.col);
-                const iconContainer = header.querySelector('i');
-                if(!iconContainer) return;
-
-                if (col === currentSort.col) {
-                    iconContainer.innerHTML = currentSort.dir === 'asc' ? sortAscIcon : sortDescIcon;
-                } else {
-                    iconContainer.innerHTML = sortNeutralIcon;
-                }
-            });
-        }
-
-        function sortTable(colIndex) {
-            const rows = Array.from(tbody.querySelectorAll('tr'));
-            
-            if (colIndex === currentSort.col) {
-                currentSort.dir = currentSort.dir === 'asc' ? 'desc' : 'asc';
-            } else {
-                currentSort.col = colIndex;
-                currentSort.dir = 'desc'; // Default new sort to high->low
-            }
-
-            rows.sort((a, b) => {
-                const aVal = parseFloat(a.cells[colIndex].textContent.trim());
-                const bVal = parseFloat(b.cells[colIndex].textContent.trim());
-                if (!isNaN(aVal) && !isNaN(bVal)) {
-                    return currentSort.dir === 'asc' ? aVal - bVal : bVal - aVal;
-                }
-                return 0;
-            });
-
-            tbody.innerHTML = '';
-            rows.forEach((row, index) => {
-                row.cells[0].textContent = index + 1; // Update Rank
-                tbody.appendChild(row);
-            });
-
-            updateSortIcons();
-        }
-
-        headers.forEach(header => {
-            // Remove old listeners by cloning to avoid duplicates on re-init
-            const newHeader = header.cloneNode(true);
-            header.parentNode.replaceChild(newHeader, header);
-            
-            newHeader.addEventListener('click', () => {
-                sortTable(parseInt(newHeader.dataset.col));
-            });
-        });
-
-        // Initialize Icons
-        updateSortIcons();
-    });
-}
-
-// Handle primary Dataset change
-document.getElementById('dataset-type').addEventListener('change', function() {
-    const datasetType = this.value;
-    const categoryContainer = document.getElementById('category-filter-container');
-    const categorySelect = document.getElementById('category-type');
-    
-    if (datasetType === 'foundational') {
-        document.getElementById('foundational-results').classList.remove('hidden');
-        document.getElementById('research-results').classList.add('hidden');
-        
-        // Show foundational sub-categories
-        categoryContainer.classList.remove('hidden');
-        categoryContainer.classList.remove('opacity-0');
-        
-        showFoundationalTable(categorySelect.value);
-    } else {
-        document.getElementById('foundational-results').classList.add('hidden');
-        document.getElementById('research-results').classList.remove('hidden');
-        
-        // Hide sub-categories for Research since it's just one unified table now
-        categoryContainer.classList.add('hidden');
-        categoryContainer.classList.add('opacity-0');
-        
-        initTableSorting(); // Ensure Research table is sortable
-    }
-});
-
-// Handle Foundational sub-category change
-document.getElementById('category-type').addEventListener('change', function() {
-    showFoundationalTable(this.value);
-});
-
-function showFoundationalTable(type) {
-    document.getElementById('undergraduate-table').classList.add('hidden');
-    document.getElementById('graduate-table').classList.add('hidden');
-    document.getElementById('overall-table').classList.add('hidden');
-    
-    document.getElementById(`${type}-table`).classList.remove('hidden');
-    initTableSorting();
-}
-
-// Refresh Button Animation
-document.getElementById('refresh-ranking').addEventListener('click', function() {
-    const icon = this.querySelector('svg');
-    icon.classList.add('animate-spin');
-    
-    // Flash effect
-    const activeTables = document.querySelectorAll('tbody');
-    activeTables.forEach(t => t.style.opacity = '0.3');
-    
-    setTimeout(() => {
-        populateTables();
-        const activeType = document.getElementById('dataset-type').value;
-        if(activeType === 'foundational') {
-            showFoundationalTable(document.getElementById('category-type').value);
-        } else {
-            initTableSorting();
-        }
-        
-        activeTables.forEach(t => t.style.opacity = '1');
-        icon.classList.remove('animate-spin');
-    }, 400);
-});
-
-// Init
-document.addEventListener('DOMContentLoaded', function() {
-    populateTables();
-    initTableSorting();
-});
-</script>
-    
-
-  <section id="paper-overview" class="py-16 md:py-20">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center max-w-4xl mx-auto mb-12">
-              <h2 class="text-2xl md:text-3xl font-bold mb-4">Overview</h2>
-              <p class="text-lg text-gray-800">A comprehensive breakdown of the first dedicated benchmark for statistical reasoning in LLMs</p>
-          </div>
-    
-
-          <!-- ========================================= -->
-          <!-- 🧩 Data Processing Pipeline Section -->
-          <!-- ========================================= -->
-          <div class="bg-white border border-gray-200 rounded-xl p-6 md:p-10 shadow-sm mb-10">
-            <h3 class="text-2xl font-bold mb-4 text-gray-900">1. Data Processing Pipeline</h3>
-
-            <p class="text-gray-700 mb-6 text-lg">
-              To overcome the brittleness of pure rule-based methods and the hallucination risks of pure LLM approaches, the <strong>StatEval</strong> pipeline adopts a synergistic <strong>hybrid modular architecture</strong>. By strategically combining deterministic regular expressions for structural extraction with the powerful semantic orchestration of GPT-5.4 and GPT-5.4-mini, the end-to-end workflow comprises six sequential modules:
-            </p>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
-                <div class="text-blue-600 font-bold text-xl mb-2 flex items-center">
-                  <span class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">1</span>
-                  File-Conversion
-                </div>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                  Homogenizes PDFs, scanned manuscripts, and <span class="font-mono bg-gray-200 px-1 rounded">LaTeX</span> sources into structured Markdown. Employs advanced MLLMs (e.g., <em>MinerU</em>) for high-fidelity mathematical OCR and layout reconstruction.
-                </p>
-              </div>
-
-              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
-                <div class="text-blue-600 font-bold text-xl mb-2 flex items-center">
-                  <span class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">2</span>
-                  Context-Segmentation
-                </div>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                  Isolates theorems and their surrounding contexts using a hybrid Regex+LLM engine. It expertly untangles nested <em>"umbrella" proofs</em>, extracts block equations, and compiles a Global Notation Reference Table.
-                </p>
-              </div>
-
-              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
-                <div class="text-blue-600 font-bold text-xl mb-2 flex items-center">
-                  <span class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">3</span>
-                  Dependency Parsing
-                </div>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                  Establishes the logical topology between theoretical elements. It precisely maps internal cross-theorem links, non-theorem structural premises (e.g., Assumptions, Definitions), and external literature citations.
-                </p>
-              </div>
-
-              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
-                <div class="text-blue-600 font-bold text-xl mb-2 flex items-center">
-                  <span class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">4</span>
-                  Pair Synthesis
-                </div>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                  Generates self-contained theorem-proof setups. Employs a strict <em>Context-Aware Patching</em> mechanism and a <em>Zero-Deletion Policy</em> to expand derivation steps safely without losing original textual integrity.
-                </p>
-              </div>
-
-              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
-                <div class="text-blue-600 font-bold text-xl mb-2 flex items-center">
-                  <span class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">5</span>
-                  QA Generation
-                </div>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                  Scales problems into Easy, Medium, and Hard variants based on the dependency graph. Features a <strong>Non-Refine Mode</strong> for absolute text fidelity and a <strong>Refine Mode</strong> for LLM-smoothed, standardized logical flow.
-                </p>
-              </div>
-
-              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
-                <div class="text-blue-600 font-bold text-xl mb-2 flex items-center">
-                  <span class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm">6</span>
-                  Quality Validation
-                </div>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                  Embeds secondary LLM audits to rigorously check proof completeness, logical sufficiency, and difficulty consistency, complemented by a Human-in-the-Loop feedback system to optimize upstream prompts.
-                </p>
-              </div>
-            </div>
-
-            <div class="text-center mt-12 bg-white p-4 rounded-xl">
-              <object data="images/pipeline.pdf" type="application/pdf" class="mx-auto rounded-xl shadow-lg border border-gray-100 w-full" style="max-width: 1200px; height: 600px;">
-                  <img src="images/pipeline.pdf" alt="StatEval data processing pipeline" class="mx-auto rounded-xl shadow-lg border border-gray-100 w-full" style="max-width: 1200px;">
-              </object>
-              <p class="text-gray-500 text-sm mt-4 italic">
-                Illustration of the <strong>StatEval</strong> data processing pipeline, showcasing the hybrid extraction and dual-mode generation workflow.
-              </p>
-            </div>
-          </div>
-
-
-          <!-- ========================================= -->
-          <!-- 🧩 Evaluation Methodology Section -->
-          <!-- ========================================= -->
-          <div class="bg-white border border-gray-200 rounded-xl p-6 md:p-10 shadow-sm mb-10">
-            <h3 class="text-2xl font-bold mb-4 text-gray-900">2. Evaluation Protocol</h3>
-
-            <p class="text-gray-700 mb-6 text-lg">
-              To ensure rigorous and interpretable evaluation, <strong>StatEval</strong> implements distinct scoring mechanisms tailored to problem structures, powered by <strong>GPT-5.4-mini</strong> as the judging model. While Multiple-Choice Questions are graded via exact matching (0 or 1), Open-Ended questions utilize an <strong>Adaptive Process-Based Scoring Pipeline</strong>.
-            </p>
-
-            <div class="space-y-6 mt-8">
-              
-              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-blue-500"></div>
-                <h4 class="font-bold text-gray-900 mb-3 text-lg">Phase 1: Logic Alignment & Routing</h4>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                  Mathematical proofs often allow for multiple valid solution paths. To avoid unfairly penalizing correct but non-standard derivations, a Selector LLM compares the student's problem-solving logic with the reference solution. The response is categorized as either <strong>Aligned</strong> (following the reference strategy) or <strong>Divergent</strong> (employing an alternative method). This ensures the response is routed to the most appropriate evaluation mechanism.
-                </p>
-              </div>
-
-              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-teal-500"></div>
-                <h4 class="font-bold text-gray-900 mb-3 text-lg">Phase 2A: Granular Step-Based Verification <span class="text-teal-600 text-sm font-medium ml-2">(For Aligned Paths)</span></h4>
-                <p class="text-gray-600 text-sm leading-relaxed mb-4">
-                  For strategically aligned responses, the system emulates human expert grading by decoupling the assessment into <strong>Decomposition</strong> and <strong>Evaluation</strong>. The reference is parsed into a 10-point <em>Grading Rubric</em> of atomic logical steps. The rubric adapts based on problem difficulty:
-                </p>
-                <ul class="list-disc list-inside text-sm text-gray-700 space-y-2 ml-2">
-                  <li><strong>Easy:</strong> Focuses directly on the terminal proof process and logical transitions.</li>
-                  <li><strong>Medium:</strong> Allocates 50% weight to the derivation of prerequisite lemmas, and 50% to the primary research result.</li>
-                  <li><strong>Hard:</strong> Evaluates the entire independent reasoning chain without pre-defined weight splits, emphasizing global coherence.</li>
-                </ul>
-              </div>
-
-              <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-purple-500"></div>
-                <h4 class="font-bold text-gray-900 mb-3 text-lg">Phase 2B: Independent Path Verification <span class="text-purple-600 text-sm font-medium ml-2">(For Divergent Paths)</span></h4>
-                <p class="text-gray-600 text-sm leading-relaxed mb-4">
-                  For valid alternative methodologies, the reference solution is bypassed. The system strictly verifies if preconditions for invoked theorems are met (penalizing forced conclusions) and evaluates the custom trajectory across two core dimensions:
-                </p>
-                <ul class="list-disc list-inside text-sm text-gray-700 space-y-2 ml-2 mb-6">
-                  <li><strong>Logical Coherence (S<sub>logic</sub>):</strong> Validity of the overarching proof strategy and step transitions.</li>
-                  <li><strong>Technical Precision (S<sub>tech</sub>):</strong> Algebraic and analytical accuracy of intermediate derivations.</li>
-                </ul>
-                
-                <div class="bg-white rounded-lg border border-gray-200 p-4 flex flex-col md:flex-row gap-6 justify-center items-center">
-                  <div class="text-center w-full md:w-auto">
-                    <span class="block text-xs text-gray-500 uppercase tracking-wider mb-2 font-semibold">Standard Proofs</span>
-                    <code class="text-sm md:text-base font-bold text-gray-800 bg-gray-100 px-4 py-2 rounded-md shadow-inner block">
-                      S<sub>final</sub> = w<sub>1</sub>S<sub>logic</sub> + w<sub>2</sub>S<sub>tech</sub>
-                    </code>
-                  </div>
-                  <div class="hidden md:block text-gray-300 text-2xl font-light">|</div>
-                  <div class="text-center w-full md:w-auto">
-                    <span class="block text-xs text-gray-500 uppercase tracking-wider mb-2 font-semibold">Quantitative Derivations</span>
-                    <code class="text-sm md:text-base font-bold text-gray-800 bg-gray-100 px-4 py-2 rounded-md shadow-inner block">
-                      S<sub>final</sub> = w<sub>1</sub>S<sub>logic</sub> + w<sub>2</sub>S<sub>tech</sub> + w<sub>3</sub>S<sub>result</sub>
-                    </code>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="text-center mt-10 bg-white p-4 rounded-xl border border-gray-100 flex justify-center items-center" style="height: 350px;">
-              <object data="images/eval_pipeline.pdf" type="application/pdf" class="rounded-lg shadow-md" style="max-width: 1000px; width: 100%; height: 100%;">
-                  <img src="images/eval_pipeline.pdf" alt="StatEval Adaptive Evaluation pipeline" class="mx-auto rounded-lg shadow-md" style="max-width: 1000px;">
-              </object>
-            </div>
-             <p class="text-gray-500 text-sm mt-2 italic text-center">
-                Illustration of the <strong>Adaptive Process-Based Scoring Pipeline</strong> for open-ended questions in StatEval.
-              </p>
-          </div>
-
-          <!-- ========================================= -->
-          <!-- 🔁 Reproducibility Details Section -->
-          <!-- ========================================= -->
-          <section id="reproducibility" class="py-16 md:py-20 bg-white">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="bg-white border border-gray-200 rounded-xl p-6 md:p-10 shadow-sm max-w-5xl mx-auto">
-      <h3 class="text-2xl font-bold mb-6 text-gray-900">3. Reproducibility Details</h3>
-
-      <p class="text-gray-700 mb-8 text-lg">
-        All benchmark resources of <strong>StatEval</strong> are publicly available to ensure transparency and reproducibility. 
-        A representative partial <strong>test set (Demo)</strong> can be accessed on Hugging Face, while implementation details and evaluation scripts are being prepared for GitHub.
-      </p>
-
-      <div class="grid sm:grid-cols-2 gap-6 mb-10">
-        <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 flex flex-col">
-          <h4 class="font-bold text-gray-900 mb-3 flex items-center">
-            <span class="mr-2">📘</span> Foundational Knowledge Demo
-          </h4>
-          <p class="text-gray-600 text-sm mb-4 flex-grow">
-            A sample of <strong>300 questions</strong> assessing mastery of classic statistical concepts and complex calculations across undergraduate and graduate levels.
-          </p>
-          <a href="https://huggingface.co/datasets/StatAILab/StatEval" target="_blank" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold text-sm transition-colors">
-            View on Hugging Face <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-          </a>
-        </div>
-
-        <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 flex flex-col">
-          <h4 class="font-bold text-gray-900 mb-3 flex items-center">
-            <span class="mr-2">📗</span> Statistical Research Demo
-          </h4>
-          <p class="text-gray-600 text-sm mb-4 flex-grow">
-            Includes <strong>100 unique research problems</strong> (300 variants) focusing on multi-step formal reasoning from top-tier statistical journals.
-          </p>
-          <a href="https://huggingface.co/datasets/StatAILab/StatEval" target="_blank" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold text-sm transition-colors">
-            View on Hugging Face <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-          </a>
-        </div>
-      </div>
-
-      <div class="border-t border-gray-100 pt-10">
-        <div class="grid md:grid-cols-2 gap-8 items-center">
-          <div class="bg-blue-50/50 rounded-xl border border-blue-100 p-6">
-            <div class="flex items-start">
-              <div class="flex-shrink-0 bg-blue-100 p-3 rounded-lg">
-                <svg class="w-6 h-6 text-blue-700" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.414-4.041-1.414-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-              </div>
-              <div class="ml-4">
-                <h4 class="text-gray-900 font-bold mb-1 text-lg">Implementation & Code</h4>
-                <p class="text-gray-600 text-sm mb-3">Reproducibility scripts are currently being prepared.</p>
-                <a href="https://github.com/StatAI-Lab/StatEval" target="_blank" class="text-blue-700 hover:text-blue-900 font-bold text-sm inline-flex items-center">
-                  Visit GitHub Repository <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-gray-50 rounded-xl border border-gray-200 p-6">
-            <h4 class="text-gray-900 font-bold mb-2 flex items-center">
-              <span class="mr-2">📬</span> Full Dataset Access
-            </h4>
-            <p class="text-gray-600 text-sm mb-4 leading-relaxed">
-              To request access to the <strong>complete test data</strong> or <strong>training data</strong>, please contact us:
-            </p>
-            <div class="flex items-center space-x-2">
-              <span class="text-gray-400 text-xs font-medium uppercase tracking-wider">Email:</span>
-              <a href="mailto:zhoufan@mail.shufe.edu.cn" class="text-blue-600 font-mono text-sm hover:underline font-semibold">
-                zhoufan@mail.shufe.edu.cn
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-8 text-center">
-          <p class="text-xs text-gray-400 italic">
-            * The updated paper detailing the full methodology and data distribution is currently in progress.
-          </p>
-        </div>
+  <nav class="nav" aria-label="Page navigation">
+    <div class="shell">
+      <a class="brand" href="#">StatEval</a>
+      <div class="nav-pills">
+        <a href="#leaderboard">Leaderboard</a>
+        <a href="#datasets">Datasets</a>
+        <a href="#examples">Examples</a>
+        <a href="#trace">TRACE</a>
+        <a href="#evaluation">Evaluation</a>
       </div>
     </div>
-  </div>
-</section>
+  </nav>
+
+  <main>
+    <section id="leaderboard" class="soft">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <h2>Comprehensive Evaluation Leaderboard</h2>
+            <p>Latest results from StatEval-mini, covering foundational statistical knowledge and research-level proof reasoning.</p>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Leaderboard tables">
+            <button class="tab active" data-table="foundational">Foundational</button>
+            <button class="tab" data-table="research">Research Proofs</button>
+          </div>
+        </div>
+
+        <div class="metric-grid">
+          <div class="metric"><strong>1,000</strong><span>Foundational evaluation items</span></div>
+          <div class="metric"><strong>900</strong><span>Research proof variants</span></div>
+          <div class="metric"><strong>9</strong><span>Models in latest comparison</span></div>
+          <div class="metric"><strong>2024-2025</strong><span>Research test articles</span></div>
+        </div>
+
+        <div id="foundational-panel" class="panel">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Model</th>
+                  <th>Grad Prob.</th>
+                  <th>Grad Stat.</th>
+                  <th>Grad ML</th>
+                  <th>Grad Mean</th>
+                  <th>Undergrad Prob.</th>
+                  <th>Undergrad Stat.</th>
+                  <th>Undergrad ML</th>
+                  <th>Undergrad Mean</th>
+                  <th>Overall</th>
+                </tr>
+              </thead>
+              <tbody id="foundational-body"></tbody>
+            </table>
+          </div>
+          <p class="note">Scores are percentages. Foundational tasks include multiple-choice, short-answer, calculation, fill-in-the-blank, and proof-based problems.</p>
+        </div>
+
+        <div id="research-panel" class="panel hidden">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Model</th>
+                  <th>Easy</th>
+                  <th>Medium</th>
+                  <th>Hard</th>
+                  <th>Mean</th>
+                </tr>
+              </thead>
+              <tbody id="research-body"></tbody>
+            </table>
+          </div>
+          <p class="note">Research tasks are proof-based theorem reasoning problems sampled from recent statistical papers.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="datasets">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <h2>Benchmark Structure</h2>
+            <p>StatEval is organized along two axes: difficulty level and statistical discipline.</p>
+          </div>
+        </div>
+
+        <div class="dataset-columns">
+          <div class="dataset-box">
+            <h3>Foundational Knowledge Dataset</h3>
+            <ul>
+              <li>22,262 problems from 76 textbooks, exams, course materials, and online resources.</li>
+              <li>9,382 undergraduate and 12,880 graduate-level instances.</li>
+              <li>Probability, Statistics, and Machine Learning, with more detailed course-level subdomains.</li>
+            </ul>
+          </div>
+          <div class="dataset-box research">
+            <h3>Statistical Research Dataset</h3>
+            <ul>
+              <li>84,179 proof-based tasks from 6,953 articles published between 2000 and 2025.</li>
+              <li>Six top-tier statistical and machine learning journals.</li>
+              <li>Easy, Medium, and Hard variants generated from theorem dependency structures.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="figure-grid figure-stack" style="margin-top: 18px;">
+          <div class="figure-card wide">
+            <img class="figure-media" src="images/overview.png" alt="StatEval overview">
+            <div class="caption">
+              <strong>Overall benchmark overview</strong>
+              Two complementary branches cover curriculum-level statistical knowledge and frontier research-level derivations.
+            </div>
+          </div>
+          <div class="figure-card">
+            <img class="figure-media" src="images/foundational_composition_distribution.png" alt="Foundational dataset composition">
+            <div class="caption">
+              <strong>Foundational composition</strong>
+              Distribution across educational levels, statistical domains, and problem formats.
+            </div>
+          </div>
+          <div class="figure-card">
+            <img class="figure-media" src="images/research_composition_distribution.png" alt="Research dataset composition">
+            <div class="caption">
+              <strong>Research composition</strong>
+              Coverage across research subfields and theoretical property categories.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="examples" class="soft">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <h2>Problem Examples</h2>
+            <p>Examples are included to make the benchmark format concrete, especially the difference between routine statistical exercises and research-level theorem reasoning.</p>
+          </div>
+        </div>
+
+        <div class="case-grid">
+          <div class="case-card">
+            <h3>Foundational tasks</h3>
+            <p>Textbook-style questions test statistical definitions, calculations, modeling judgment, and proof-based reasoning across undergraduate and graduate curricula.</p>
+          </div>
+          <div class="case-card">
+            <h3>Research Easy</h3>
+            <p>Prerequisite theorems or lemmas are provided as facts, so the model focuses on proving the target result.</p>
+          </div>
+          <div class="case-card">
+            <h3>Research Medium and Hard</h3>
+            <p>Medium requires proving prerequisites before the main result; Hard removes prerequisite hints and requires building the proof chain independently.</p>
+          </div>
+        </div>
+
+        <div class="figure-grid" style="margin-top: 18px;">
+          <div class="figure-card">
+            <img class="figure-media" src="images/foundational_example.png" alt="Foundational problem example">
+            <div class="caption">
+              <strong>Foundational example</strong>
+              Representative curriculum-level statistical reasoning item.
+            </div>
+          </div>
+          <div class="figure-card">
+            <img class="figure-media" src="images/research_example.png" alt="Research problem variants">
+            <div class="caption">
+              <strong>Research-level variants</strong>
+              A theorem instantiated under Easy, Medium, and Hard settings.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="trace">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <h2>TRACE Data Processing Pipeline</h2>
+            <p>TRACE combines deterministic structural extraction with LLM-based semantic validation to convert unstructured statistical papers into self-contained theorem-level reasoning tasks.</p>
+          </div>
+        </div>
+
+        <div class="step-grid">
+          <div class="step-card">
+            <h3>1. Convert and segment</h3>
+            <p>PDFs are normalized into structured Markdown, then theorems, assumptions, equations, and proofs are isolated with context-aware markers.</p>
+          </div>
+          <div class="step-card">
+            <h3>2. Harmonize notation</h3>
+            <p>Document-level notation and surrounding assumptions are consolidated so each extracted problem remains self-contained.</p>
+          </div>
+          <div class="step-card">
+            <h3>3. Build dependencies</h3>
+            <p>Prerequisite theorems, lemmas, definitions, and equations are organized into a topological dependency graph.</p>
+          </div>
+          <div class="step-card">
+            <h3>4. Generate difficulties</h3>
+            <p>Easy, Medium, and Hard variants are synthesized by changing how much dependency information is provided.</p>
+          </div>
+          <div class="step-card">
+            <h3>5. Patch carefully</h3>
+            <p>Context-Aware Patching resolves local OCR artifacts or missing intermediate steps under a Zero-Deletion Policy.</p>
+          </div>
+          <div class="step-card">
+            <h3>6. Validate quality</h3>
+            <p>Completeness, sufficiency, and consistency checks are followed by human expert review on sampled cases.</p>
+          </div>
+        </div>
+
+        <div class="figure-grid figure-stack" style="margin-top: 18px;">
+          <div class="figure-card wide">
+            <img class="figure-media" src="images/data_generation_pipeline.png" alt="TRACE pipeline">
+            <div class="caption">
+              <strong>TRACE pipeline overview</strong>
+              Six modules cover conversion, segmentation, base problem generation, dependency parsing, multi-difficulty synthesis, and validation.
+            </div>
+          </div>
+          <div class="figure-card wide">
+            <img class="figure-media" src="images/pipeline_case1.png" alt="Distributed proof case">
+            <div class="caption">
+              <strong>Distributed proof extraction</strong>
+              TRACE decouples upper-bound and lower-bound proof fragments while preserving logical structure.
+            </div>
+          </div>
+          <div class="figure-card wide">
+            <img class="figure-media" src="images/pipeline_case2.png" alt="Notation harmonization case">
+            <div class="caption">
+              <strong>Notation harmonization</strong>
+              Global notation prevents symbols from being misinterpreted when theorem blocks are extracted.
+            </div>
+          </div>
+          <div class="figure-card wide">
+            <img class="figure-media" src="images/pipeline_case3.png" alt="Context-aware patching case">
+            <div class="caption">
+              <strong>Context-Aware Patching</strong>
+              Local expansions repair typographical artifacts and logical jumps without rewriting the original proof strategy.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="evaluation" class="soft">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <h2>Adaptive Evaluation Protocol</h2>
+            <p>Multiple-choice questions are graded by exact matching, while open-ended statistical derivations are scored through an adaptive process-based pipeline.</p>
+          </div>
+        </div>
+
+        <div class="case-grid">
+          <div class="case-card">
+            <h3>Logic alignment</h3>
+            <p>A selector model routes each response according to whether it follows the reference proof strategy or uses a divergent but potentially valid path.</p>
+          </div>
+          <div class="case-card">
+            <h3>Reference-based scoring</h3>
+            <p>Aligned solutions are mapped onto atomic proof steps and receive normalized partial credit for completed logical components.</p>
+          </div>
+          <div class="case-card">
+            <h3>Independent verification</h3>
+            <p>Divergent solutions are judged by logical coherence, technical precision, and terminal accuracy when applicable.</p>
+          </div>
+        </div>
+
+        <div class="figure-grid figure-stack" style="margin-top: 18px;">
+          <div class="figure-card wide">
+            <img class="figure-media" src="images/evaluation_pipeline.png" alt="Adaptive evaluation pipeline">
+            <div class="caption">
+              <strong>Scoring pipeline</strong>
+              Responses are routed to reference-based step verification or independent path verification.
+            </div>
+          </div>
+          <div class="figure-card wide">
+            <img class="figure-media" src="images/evaluation_case.png" alt="Evaluation case study">
+            <div class="caption">
+              <strong>Evaluation case</strong>
+              A compact example showing how aligned and divergent proof attempts are scored.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell">
+      StatEval is developed by the team of Professor Fan Zhou at Shanghai University of Finance and Economics. Demo data are available on Hugging Face; full dataset access can be requested via zhoufan@mail.shufe.edu.cn.
+    </div>
+  </footer>
 
   <script>
-      // Evaluation tab switching functionality
-      document.querySelectorAll('.eval-tab').forEach(tab => {
-          tab.addEventListener('click', () => {
-              // Remove active state from all tabs
-              document.querySelectorAll('.eval-tab').forEach(t => {
-                  t.classList.remove('active', 'border-primary', 'text-primary');
-                  t.classList.add('border-transparent', 'text-gray-500');
-              });
-              
-              // Add active state to current tab
-              tab.classList.add('active', 'border-primary', 'text-primary');
-              tab.classList.remove('border-transparent', 'text-gray-500');
-              
-              // Hide all panels
-              document.querySelectorAll('.eval-panel').forEach(panel => {
-                  panel.classList.add('hidden');
-                  panel.classList.remove('active');
-              });
-              
-              // Show corresponding panel
-              const panelId = tab.getAttribute('data-tab') + '-panel';
-              const activePanel = document.getElementById(panelId);
-              activePanel.classList.remove('hidden');
-              activePanel.classList.add('active');
-          });
-      });
-  </script>
-    
+    const foundationalData = [
+      { model: "Gemini-3.1-Pro-Preview", gProb: 89.07, gStat: 87.78, gMl: 92.60, gMean: 89.07, ugProb: 94.59, ugStat: 89.86, ugMl: 91.13, ugMean: 92.26, overall: 90.83 },
+      { model: "DeepSeek-V4-Pro", gProb: 81.95, gStat: 91.78, gMl: 94.94, gMean: 89.65, ugProb: 80.19, ugStat: 88.68, ugMl: 76.31, ugMean: 82.92, overall: 90.66 },
+      { model: "Qwen-3.6-Plus", gProb: 93.05, gStat: 89.42, gMl: 88.46, gMean: 90.15, ugProb: 91.52, ugStat: 87.24, ugMl: 87.74, ugMean: 89.29, overall: 89.68 },
+      { model: "GPT-5.4", gProb: 86.31, gStat: 82.76, gMl: 90.36, gMean: 85.19, ugProb: 90.59, ugStat: 86.86, ugMl: 92.04, ugMean: 89.48, overall: 87.55 },
+      { model: "Claude-Opus-4.7", gProb: 90.94, gStat: 86.39, gMl: 83.29, gMean: 86.92, ugProb: 88.90, ugStat: 89.47, ugMl: 79.46, ugMean: 87.48, overall: 87.23 },
+      { model: "DeepSeek-V3.2-thinking", gProb: 87.84, gStat: 86.95, gMl: 88.21, gMean: 87.42, ugProb: 90.18, ugStat: 85.78, ugMl: 79.80, ugMean: 86.78, overall: 87.07 },
+      { model: "Doubao-Seed-2.0-Pro", gProb: 84.71, gStat: 84.40, gMl: 83.23, gMean: 84.24, ugProb: 87.69, ugStat: 82.02, ugMl: 84.69, ugMean: 85.10, overall: 84.71 },
+      { model: "Llama-4-Maverick-17B-128E", gProb: 75.59, gStat: 74.13, gMl: 75.09, gMean: 74.69, ugProb: 75.48, ugStat: 73.68, ugMl: 78.52, ugMean: 75.35, overall: 75.05 },
+      { model: "Qwen3-4B", gProb: 69.43, gStat: 73.70, gMl: 57.82, gMean: 69.46, ugProb: 75.28, ugStat: 61.33, ugMl: 75.49, ugMean: 70.25, overall: 69.90 }
+    ];
 
+    const researchData = [
+      { model: "GPT-5.4", easy: 68.28, medium: 65.57, hard: 51.28, mean: 61.70 },
+      { model: "DeepSeek-V4-Pro", easy: 65.73, medium: 57.81, hard: 41.86, mean: 55.15 },
+      { model: "Claude-Opus-4.7", easy: 56.79, medium: 54.25, hard: 42.02, mean: 51.02 },
+      { model: "Qwen-3.6-Plus", easy: 55.42, medium: 51.92, hard: 40.05, mean: 49.14 },
+      { model: "DeepSeek-V3.2-thinking", easy: 56.64, medium: 51.43, hard: 38.72, mean: 48.93 },
+      { model: "Gemini-3.1-Pro-Preview", easy: 55.55, medium: 49.18, hard: 37.02, mean: 47.25 },
+      { model: "Doubao-Seed-2.0-Pro", easy: 47.22, medium: 44.31, hard: 33.55, mean: 41.69 },
+      { model: "Llama-4-Maverick-17B-128E", easy: 38.29, medium: 27.06, hard: 22.43, mean: 29.26 },
+      { model: "Qwen3-4B", easy: 28.55, medium: 23.96, hard: 17.37, mean: 23.30 }
+    ];
+
+    function fmt(value) {
+      return Number(value).toFixed(2);
+    }
+
+    function renderFoundational() {
+      const rows = foundationalData
+        .slice()
+        .sort((a, b) => b.overall - a.overall)
+        .map((item, index) => `
+          <tr>
+            <td class="rank">${index + 1}</td>
+            <td class="model">${item.model}</td>
+            <td>${fmt(item.gProb)}</td>
+            <td>${fmt(item.gStat)}</td>
+            <td>${fmt(item.gMl)}</td>
+            <td class="score">${fmt(item.gMean)}</td>
+            <td>${fmt(item.ugProb)}</td>
+            <td>${fmt(item.ugStat)}</td>
+            <td>${fmt(item.ugMl)}</td>
+            <td class="score">${fmt(item.ugMean)}</td>
+            <td class="score">${fmt(item.overall)}</td>
+          </tr>
+        `)
+        .join("");
+      document.getElementById("foundational-body").innerHTML = rows;
+    }
+
+    function renderResearch() {
+      const rows = researchData
+        .slice()
+        .sort((a, b) => b.mean - a.mean)
+        .map((item, index) => `
+          <tr>
+            <td class="rank">${index + 1}</td>
+            <td class="model">${item.model}</td>
+            <td>${fmt(item.easy)}</td>
+            <td>${fmt(item.medium)}</td>
+            <td>${fmt(item.hard)}</td>
+            <td class="score">${fmt(item.mean)}</td>
+          </tr>
+        `)
+        .join("");
+      document.getElementById("research-body").innerHTML = rows;
+    }
+
+    document.querySelectorAll(".tab").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach((tab) => tab.classList.remove("active"));
+        button.classList.add("active");
+
+        const target = button.dataset.table;
+        document.getElementById("foundational-panel").classList.toggle("hidden", target !== "foundational");
+        document.getElementById("research-panel").classList.toggle("hidden", target !== "research");
+      });
+    });
+
+    renderFoundational();
+    renderResearch();
+  </script>
 </body>
 </html>
